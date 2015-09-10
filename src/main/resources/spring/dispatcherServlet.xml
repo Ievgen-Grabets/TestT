@@ -12,6 +12,7 @@
     <mvc:annotation-driven/>
 
     <mvc:resources mapping="/resources/**" location="/resources/"/>
+    <mvc:resources mapping="/robots.txt" location="/robots.txt" order="0" />
 
     <context:component-scan base-package="evg.testt">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
