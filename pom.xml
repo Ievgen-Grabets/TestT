@@ -14,6 +14,12 @@
         <spring.version>4.2.1.RELEASE</spring.version>
         <version.spring.mongodb>1.8.0.RELEASE</version.spring.mongodb>
         <version.jackson>1.9.13</version.jackson>
+        <!-- Hibernate -->
+        <hibernate.version>5.0.1.Final</hibernate.version>
+        <hibernate.validator.version>5.2.1.Final</hibernate.validator.version>
+        <hibernate.commons.version>5.0.0.Final</hibernate.commons.version>
+        <!-- Validation -->
+        <oval.version>1.84</oval.version>
     </properties>
 
     <dependencies>
@@ -47,6 +53,47 @@
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-mongodb</artifactId>
             <version>${version.spring.mongodb}</version>
+        </dependency>
+
+        <!-- Hibernate -->
+        <dependency>
+            <groupId>org.hibernate.common</groupId>
+            <artifactId>hibernate-commons-annotations</artifactId>
+            <version>${hibernate.commons.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${hibernate.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.hibernate.common</groupId>
+                    <artifactId>hibernate-commons-annotations</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>${hibernate.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.hibernate</groupId>
+                    <artifactId>hibernate-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.hibernate.common</groupId>
+                    <artifactId>hibernate-commons-annotations</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!--oval validator-->
+        <dependency>
+            <groupId>net.sf.oval</groupId>
+            <artifactId>oval</artifactId>
+            <version>${oval.version}</version>
         </dependency>
 
         <!-- Mongo Driver -->

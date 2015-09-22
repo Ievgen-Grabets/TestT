@@ -19,11 +19,15 @@ public class MainController {
     @Autowired
     private ContactService contactService;
 
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView showAll() {
         ModelAndView modelAndView = new ModelAndView("all");
 
         modelAndView.addObject("contacts", contactService.getAll());
+        System.out.println("before  a.hashCode();");
+        //System.out.println("a.hashCode()" + a.hashCode());
+        System.out.println("after  a.hashCode();");
 
         return modelAndView;
     }
