@@ -13,17 +13,8 @@
         http://www.springframework.org/schema/data/jpa
         http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
         http://www.springframework.org/schema/data/mongo
-        http://www.springframework.org/schema/data/mongo/spring-mongo.xsd">
+        http://www.springframework.org/schema/data/mongo/spring-mongo.xsd" profile="staging">
 
-
-    <mongo:mongo host="${mongo.host}" port="${mongo.port}"/>
-
-    <mongo:db-factory
-            dbname="${mongo.db}"
-            mongo-ref="mongo"/>
-
-    <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
-        <constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>
-    </bean>
+    <context:property-placeholder location="classpath:database_nosql.staging.properties"/>
 
 </beans>

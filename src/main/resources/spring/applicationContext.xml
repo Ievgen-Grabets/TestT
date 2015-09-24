@@ -17,18 +17,6 @@
 
     <context:annotation-config/>
 
-    <context:property-placeholder location="classpath:database_nosql.properties"/>
-
-    <mongo:mongo host="${mongo.host}" port="${mongo.port}"/>
-
-    <mongo:db-factory
-            dbname="${mongo.db}"
-            mongo-ref="mongo"/>
-
-    <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
-        <constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>
-    </bean>
-
     <context:component-scan base-package="evg.testt">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
