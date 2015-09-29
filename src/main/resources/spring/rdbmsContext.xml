@@ -3,7 +3,6 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:jpa="http://www.springframework.org/schema/data/jpa"
-       xmlns:mongo="http://www.springframework.org/schema/data/mongo"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
@@ -11,14 +10,15 @@
         http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx.xsd
         http://www.springframework.org/schema/data/jpa
-        http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
-        http://www.springframework.org/schema/data/mongo
-        http://www.springframework.org/schema/data/mongo/spring-mongo.xsd">
+        http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
-
-   <!-- <context:property-placeholder location="classpath:/database_rdbms.properties" file-encoding="UTF-8"/> -->
-
-<!--    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"></bean>
+    <!-- Datasource config -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${jdbc.driverClassName}" />
+        <property name="url" value="${jdbc.databaseUrl}" />
+        <property name="username" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
+    </bean>
 
     <bean class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
           id="entityManagerFactory">
@@ -50,23 +50,7 @@
     <jpa:repositories base-package="evg.testt.dao"
                       entity-manager-factory-ref="entityManagerFactory"
                       transaction-manager-ref="txManager"
-                      repository-impl-postfix="CustomImpl"/>-->
+                      repository-impl-postfix="CustomImpl"/>
 
-    <bean name="objectMapper" class="org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean"
-          autowire="no">
-        <property name="featuresToDisable">
-            <list>
-                <value type="com.fasterxml.jackson.databind.SerializationFeature">FAIL_ON_EMPTY_BEANS</value>
-                <value type="com.fasterxml.jackson.databind.DeserializationFeature">FAIL_ON_UNKNOWN_PROPERTIES</value>
-            </list>
-
-        </property>
-    </bean>
-
-    <bean id="validator" class="net.sf.oval.integration.spring.SpringValidator">
-        <property name="validator">
-            <bean class="net.sf.oval.Validator"/>
-        </property>
-    </bean>
 
 </beans>

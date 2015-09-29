@@ -15,6 +15,13 @@
         http://www.springframework.org/schema/data/mongo
         http://www.springframework.org/schema/data/mongo/spring-mongo.xsd" profile="staging">
 
-    <context:property-placeholder location="classpath:database_nosql.staging.properties"/>
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath*:database_nosql.staging.properties</value>
+                <value>classpath*:database_rdbms.staging.properties</value>
+            </list>
+        </property>
+    </bean>
 
 </beans>
