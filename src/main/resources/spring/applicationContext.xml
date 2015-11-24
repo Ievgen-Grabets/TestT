@@ -19,4 +19,6 @@
 
     <context:component-scan base-package="evg.testt"/>
 
+    <bean class="com.fasterxml.jackson.databind.ObjectMapper"/>
+
 </beans>
