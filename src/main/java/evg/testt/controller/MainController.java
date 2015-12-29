@@ -56,9 +56,4 @@ public class MainController {
         return "redirect:/";
     }
 
-    @RequestMapping(value = "/iframetest", method = RequestMethod.GET)
-    public ModelAndView iframetest() {
-        return new ModelAndView("iframetest");
-    }
-
 }
