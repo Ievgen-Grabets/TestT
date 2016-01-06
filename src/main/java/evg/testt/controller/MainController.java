@@ -2,6 +2,7 @@ package evg.testt.controller;
 
 import evg.testt.model.Contact;
 import evg.testt.service.ContactService;
+import evg.testt.util.JspPath;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -19,18 +20,17 @@ public class MainController {
     @Autowired
     private ContactService contactService;
 
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView showAll() {
-        ModelAndView modelAndView = new ModelAndView("all");
-
-        modelAndView.addObject("contacts", contactService.getAll());
-
-        return modelAndView;
+        //ModelAndView modelAndView = new ModelAndView("contacts/all");
+        //modelAndView.addObject("contacts", contactService.getAll());
+        return new ModelAndView(JspPath.HOME);
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public ModelAndView showAddForm() {
-        return new ModelAndView("add_form", "contact", new Contact());
+        return new ModelAndView("contacts/add_form", "contact", new Contact());
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
@@ -47,13 +47,12 @@ public class MainController {
 
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
     public ModelAndView showEditForm(@RequestParam(required = true) Long id) {
-        return new ModelAndView("add_form", "contact", contactService.get(id));
+        return new ModelAndView("contacts/add_form", "contact", contactService.get(id));
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public String deleteContact(@RequestParam(required = true) Long id) {
         contactService.remove(id);
-
         return "redirect:/";
     }
 

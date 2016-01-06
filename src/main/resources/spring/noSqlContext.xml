@@ -15,10 +15,15 @@
         http://www.springframework.org/schema/data/mongo
         http://www.springframework.org/schema/data/mongo/spring-mongo.xsd">
 
-    <context:annotation-config/>
 
-    <context:component-scan base-package="evg.testt"/>
+    <mongo:mongo host="${mongo.host}" port="${mongo.port}"/>
 
-    <bean class="com.fasterxml.jackson.databind.ObjectMapper"/>
+    <mongo:db-factory
+            dbname="${mongo.db}"
+            mongo-ref="mongo"/>
+
+    <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+        <constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>
+    </bean>
 
 </beans>

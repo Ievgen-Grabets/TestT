@@ -13,12 +13,16 @@
         http://www.springframework.org/schema/data/jpa
         http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
         http://www.springframework.org/schema/data/mongo
-        http://www.springframework.org/schema/data/mongo/spring-mongo.xsd">
+        http://www.springframework.org/schema/data/mongo/spring-mongo.xsd" profile="dev">
 
-    <context:annotation-config/>
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath*:database_nosql.dev.properties</value>
+                <value>classpath*:database_rdbms.dev.properties</value>
+            </list>
+        </property>
+    </bean>
 
-    <context:component-scan base-package="evg.testt"/>
-
-    <bean class="com.fasterxml.jackson.databind.ObjectMapper"/>
 
 </beans>
