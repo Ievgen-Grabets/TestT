@@ -11,6 +11,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 /**
  * Created on 9/10/15.
  */
@@ -22,9 +26,10 @@ public class MainController {
 
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView showAll() {
+    public ModelAndView showAll(HttpServletRequest request, HttpServletResponse response) {
         //ModelAndView modelAndView = new ModelAndView("contacts/all");
         //modelAndView.addObject("contacts", contactService.getAll());
+        HttpSession session = request.getSession();
         return new ModelAndView(JspPath.HOME);
     }
 
