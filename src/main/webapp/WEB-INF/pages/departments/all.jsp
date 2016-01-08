@@ -8,15 +8,15 @@
   <tr>
     <td><b>Name</b></td>
   </tr>
-  <c:forEach var="contact" items="${contacts}">
+  <c:forEach var="department" items="${departments}">
     <tr>
-      <td>${contact.id}</td>
-      <td><a href="/edit?id=${contact.id}">Edit</a> | <a href="/delete?id=${contact.id}">Delete</a></td>
+      <td>${department.name}</td>
+      <%--<td><a href="/depAdd?id=${contact.id}">Edit</a> | <a href="/delete?id=${contact.id}">Delete</a></td>--%>
     </tr>
   </c:forEach>
   <tr>
     <td colspan="5">
-      <a href="/add">Add new one</a>
+      <a href="/depAdd">Add new one</a>
     </td>
   </tr>
 </table>
