@@ -4,7 +4,9 @@ import evg.testt.model.Department;
 import evg.testt.service.DepartmentService;
 import evg.testt.util.JspPath;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jmx.export.annotation.ManagedAttribute;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -50,38 +52,47 @@ public class DepartmentController {
         }
         return "redirect:/dep";
     }
-    /*@RequestMapping(value = "/deleteEdit", method = RequestMethod.GET)
-    public ModelAndView editOne(@RequestParam(required = true) Integer id){
 
-            return new ModelAndView(JspPath.DEPARTMENT_ADD, "department", ;
+
+    @RequestMapping(value = "/depEdit", method = RequestMethod.GET)
+    public ModelAndView showEdit(@RequestParam(value = "id", required=true)Integer id) throws SQLException{
+
+            Department department = departmentService.getById(id);
+            return new ModelAndView(JspPath.DEPARTMENT_EDIT,"department",department);
+
     }
-*/
-    //Variant 1
-   /* @RequestMapping(value = "/deleteDep", method = RequestMethod.GET)
-    public String deleteOne(@RequestParam(required = true) Integer id){
+    /*@RequestMapping(value = "/updateDep", method = RequestMethod.POST)
+    public String editDep(@RequestParam (required  = true) String name, @RequestParam(value="id", required = true)Integer id ){
         try {
-            Department deleteDepartment = departmentService.getById(id);
-            departmentService.delete(deleteDepartment);
+            Department ediDep = new Department();
+            ediDep.setName(name);
+            ediDep.setId(id);
+            departmentService.update(ediDep);
         }catch (SQLException e){
             e.printStackTrace();
         }
         return "redirect:/dep";
     }*/
-
-    //Variant 2
-    @RequestMapping(value = "/deleteDep", method = RequestMethod.GET)
-    public String deleteOne(@RequestParam(required = true) Integer id){
-        try {
-            departmentService.delete(departmentService.getById(id));
-        }catch (SQLException e){
+    @RequestMapping(value = "/updateDep", method = RequestMethod.POST)
+    public String editDep(@ModelAttribute Department department){
+        try{
+                departmentService.update(department);
+        }catch(SQLException e){
             e.printStackTrace();
         }
         return "redirect:/dep";
     }
 
-
-
-
-
+    @RequestMapping(value = "/deleteDep", method = RequestMethod.GET)
+    public String deleteOne(@RequestParam(required = true) Integer id){
+        try {
+            Department deleteDepartment = new Department();
+            deleteDepartment.setId(id);
+            departmentService.delete(deleteDepartment);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return "redirect:/dep";
+    }
 
 }
