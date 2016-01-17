@@ -8,6 +8,16 @@ public class Employee extends BaseModel{
     private String firstName;
     private String secondName;
 
+    private Integer departmentId;
+
+    public Integer getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(Integer departmentId) {
+        this.departmentId = departmentId;
+    }
+
     public String getFirstName() {
         return firstName;
     }
