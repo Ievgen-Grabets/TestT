@@ -4,6 +4,7 @@ import evg.testt.model.Department;
 import evg.testt.service.DepartmentService;
 import evg.testt.util.JspPath;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -49,6 +50,46 @@ public class DepartmentController {
         }
         return "redirect:/dep";
     }
+
+    @RequestMapping(value = "/depDelete", method = RequestMethod.POST)
+    public String deleteOne(@RequestParam(required = true) Integer id) {
+        Department departmentForDelete = new Department();
+        departmentForDelete.setId(id);
+        try {
+            departmentService.delete(departmentForDelete);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return "redirect:/dep";
+    }
+
+    @RequestMapping(value = "/depUpdate", method = RequestMethod.POST)
+    public ModelAndView updeteOne(@RequestParam(required = true) Integer id) {
+        Department departmentForUpdate = new Department();
+        try {
+            departmentForUpdate = departmentService.getById(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return new ModelAndView(JspPath.DEPARTMENT_UPDATE,"departmentForUpdate", departmentForUpdate);
+    }
+
+    @RequestMapping(value = "/depSaveUpdated", method = RequestMethod.POST)
+    public String updateOne(@RequestParam(required = true) Integer id, @RequestParam(required = true) String name){
+        Department departmentUpdated = new Department();
+        departmentUpdated.setId(id);
+        departmentUpdated.setName(name);
+        try {
+            departmentService.update(departmentUpdated);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return "redirect:/dep";
+    }
+
+
+   // @RequestMapping(value = "/depUpdate", )
+
 
 
 }

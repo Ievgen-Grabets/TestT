@@ -13,7 +13,8 @@
         </tr>
         <tr>
             <td colspan="2">
-                <input type="submit" />
+                <input type="hidden" name="id" value=${departmentForUpdate.id}>
+                <input type="submit" value="Add new Department"/>
             </td>
         </tr>
     </table>
