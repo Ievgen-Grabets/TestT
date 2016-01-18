@@ -1,6 +1,6 @@
 package evg.testt.model;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 @Entity(name = "employees")
 public class Employee extends BaseModel{
@@ -8,14 +8,15 @@ public class Employee extends BaseModel{
     private String firstName;
     private String secondName;
 
-    private Integer departmentId;
+    @ManyToOne
+    private Department department;
 
-    public Integer getDepartmentId() {
-        return departmentId;
+    public Department getDepartment() {
+        return department;
     }
 
-    public void setDepartmentId(Integer departmentId) {
-        this.departmentId = departmentId;
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 
     public String getFirstName() {

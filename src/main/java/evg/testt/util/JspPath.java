@@ -10,4 +10,7 @@ public class JspPath {
     public static final String DEPARTMENT_ADD = "departments/edit";
     public static final String DEPARTMENT_EDIT = "departments/editDep";
 
+    public static final String EMPLOYEE_ALL = "employees/all";
+    public static final String EMLOYEE_ADD = "employees/add";
+
 }
