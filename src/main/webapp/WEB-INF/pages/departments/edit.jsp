@@ -14,7 +14,7 @@
         <tr>
             <td colspan="2">
                 <input type="hidden" name="id" value=${departmentForUpdate.id}>
-                <input type="submit" value="Add new Department"/>
+                <input type="submit" value="Add new Department">
             </td>
         </tr>
     </table>
