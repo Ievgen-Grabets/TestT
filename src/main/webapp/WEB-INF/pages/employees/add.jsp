@@ -6,46 +6,28 @@
     <title>Add new employee</title>
 </head>
 <body>
-<form:form  method="post" action="/saveEmployee">
+
+<form:form  method="post" action="/saveEmployee" modelAttribute="editEmployee">
+    <form:hidden path="id"/>
     <table>
         <tr>
-            <td>FirstName:</td>
-            <td>SecondName:</td>
-            <td>Department:</td>
+            <td><b>FirstName:</b></td>
+            <td><b>SecondName:</b></td>
+            <td><b>Department:</b></td>
         </tr>
         <tr>
-
-            <td><input type="text" name="firstName"/></td>
-            <td><input type="text" name="secondName"/></td>
-
-                <td>
-                <select size=1 name="departmentId">
-                    <c:forEach var="department" items="${departments}">
-                    <option value=${department.id}>${department.name}</option>
-                    </c:forEach>
-                </select>
-                </td>
-
-            <%--
-
-              <p><select size="3" multiple name="hero[]">
-    <option disabled>Выберите героя</option>
-    <option value="Чебурашка">Чебурашка</option>
-    <option selected value="Крокодил Гена">Крокодил Гена</option>
-    <option value="Шапокляк">Шапокляк</option>
-    <option value="Крыса Лариса">Крыса Лариса</option>
-   </select></p>
-
-
-
-              --%>
-
-
-
-
-            <%-- <td><form:input path="depName" /></td>
-            <td><form:input path="" /></td>
-            --%>
+            <td><form:input path="firstName"/></td>
+            <td><form:input path="secondName"/></td>
+            <td><form:select path="department.id">
+                <c:if test="${department.id != null}">
+                    <form:option value="${department.id}" label="${department.name}"/>
+                </c:if>
+                <c:forEach var="dep" items="${departments}">
+                    <c:if test="${dep.id != department.id}">
+                        <form:option value="${dep.id}" label="${dep.name}"/>
+                    </c:if>
+                </c:forEach>
+            </form:select></td>
         </tr>
 
        <%-- <tr>

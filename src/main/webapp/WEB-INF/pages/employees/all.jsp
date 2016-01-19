@@ -13,9 +13,9 @@
             <td>${employee.firstName}</td>
             <td>${employee.secondName}</td>
             <td>${employee.department.name}</td>
-            <%-- <td><a href="/depEdit?id=${employee.id}">Edit</a> | <a href="/depDelete?id=${employee.id}">Delete</a></td> --%>
+            <td><a href="editEmployee?id=${employee.id}">Edit</a> | <a href="deleteEmployee?id=${employee.id}">Delete</a></td>
         </tr>
     </c:forEach>
 </table>
 <hr/>
-<a href="/addEmployee">Add new one</a>
+<a href="addEmployee">Add new one</a>

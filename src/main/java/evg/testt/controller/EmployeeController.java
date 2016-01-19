@@ -7,6 +7,7 @@ import evg.testt.service.EmployeeService;
 import evg.testt.util.JspPath;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,20 +36,10 @@ public class EmployeeController {
             e.printStackTrace();
         }
 
-        /*
-        System.err.println("employees.size = " + employees.size());
-        if(!employees.isEmpty()) {
-            Employee employee = employees.get(0);
-            System.err.println("empl[0]: name = " + employee.getFirstName());
-        }
-        */
-
         return new ModelAndView(JspPath.EMPLOYEE_ALL, "employees", employees);
     }
 
-    @RequestMapping(value = "/addEmployee", method = RequestMethod.GET)
-    public ModelAndView showAdd() {
-
+    private List<Department> getDepartments() {
         List<Department> departments;
         try {
             departments = departmentService.getAll();
@@ -56,28 +47,55 @@ public class EmployeeController {
             departments = Collections.emptyList();
             e.printStackTrace();
         }
-
-        return new ModelAndView(JspPath.EMPLOYEE_ADD,"departments",departments);
+        return departments;
     }
 
-    @RequestMapping(value = "/saveEmployee", method = RequestMethod.POST)
-    public String addNewOne(@RequestParam String firstName,
-                            @RequestParam String secondName,
-                            @RequestParam Integer departmentId) {
+    @RequestMapping(value = "/addEmployee", method = RequestMethod.GET)
+    public ModelAndView addNew() {
+        return makeModelAndViewForEdit(new Employee());
+    }
+
+    private ModelAndView makeModelAndViewForEdit(Employee editEmployee) {
+        List<Department> departments = getDepartments();
+
+        ModelAndView modelAndView = new ModelAndView(JspPath.EMPLOYEE_ADD);
+        modelAndView.addObject("departments",departments);
+        modelAndView.addObject("editEmployee", editEmployee);
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/editEmployee", method = RequestMethod.GET)
+    public ModelAndView edit(@RequestParam(required = true) Integer id) {
         try {
+            return makeModelAndViewForEdit(employeeService.getById(id));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return showAll();
+    }
 
-            Employee employee = new Employee();
-            employee.setFirstName(firstName);
-            employee.setSecondName(secondName);
-            Department department = departmentService.getById(departmentId);
-            employee.setDepartment(department);
 
-            employeeService.insert(employee);
+    @RequestMapping(value = "/saveEmployee", method = RequestMethod.POST)
+    public String save(@ModelAttribute Employee employee) {
+        try {
+            employeeService.update(employee);
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return "redirect:/employees";
     }
 
+    @RequestMapping(value = "/deleteEmployee", method = RequestMethod.GET)
+    public String delete(@RequestParam(required = true) Integer id) {
+        try {
+            Employee employee = new Employee();
+            employee.setId(id);
+            employeeService.delete(employee);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return "redirect:/employees";
+    }
 
 }

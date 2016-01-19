@@ -71,15 +71,6 @@ public class DepartmentController {
         }
 
         Set<Employee> employees = department.getEmployees();
-
-        System.err.println("employeeslist size = " + employees.size());
-        /*
-        if(!employees.isEmpty()) {
-            Employee employee = employees.get(0);
-            System.err.println("employee firesName = " + employee.getFirstName());
-        }
-        */
-
         return new ModelAndView(JspPath.DEPARTMENT_ALL_EMPLOYEES, "department", department);
     }
 
