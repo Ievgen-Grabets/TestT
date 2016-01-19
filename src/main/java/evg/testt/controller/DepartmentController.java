@@ -1,6 +1,7 @@
 package evg.testt.controller;
 
 import evg.testt.model.Department;
+import evg.testt.model.Employee;
 import evg.testt.service.DepartmentService;
 import evg.testt.util.JspPath;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.sql.SQLException;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class DepartmentController {
@@ -56,6 +58,29 @@ public class DepartmentController {
             e.printStackTrace();
         }
         return "redirect:/dep";
+    }
+
+    @RequestMapping(value = "/showDepEmployees", method = RequestMethod.GET)
+    public ModelAndView showDepEmployees(@RequestParam(required = true) Integer id) {
+        Department department;
+        try {
+            department = departmentService.getById(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            department = new Department();
+        }
+
+        Set<Employee> employees = department.getEmployees();
+
+        System.err.println("employeeslist size = " + employees.size());
+        /*
+        if(!employees.isEmpty()) {
+            Employee employee = employees.get(0);
+            System.err.println("employee firesName = " + employee.getFirstName());
+        }
+        */
+
+        return new ModelAndView(JspPath.DEPARTMENT_ALL_EMPLOYEES, "department", department);
     }
 
 /*

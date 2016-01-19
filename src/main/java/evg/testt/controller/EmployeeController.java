@@ -57,7 +57,7 @@ public class EmployeeController {
             e.printStackTrace();
         }
 
-        return new ModelAndView(JspPath.EMLOYEE_ADD,"departments",departments);
+        return new ModelAndView(JspPath.EMPLOYEE_ADD,"departments",departments);
     }
 
     @RequestMapping(value = "/saveEmployee", method = RequestMethod.POST)
@@ -69,7 +69,8 @@ public class EmployeeController {
             Employee employee = new Employee();
             employee.setFirstName(firstName);
             employee.setSecondName(secondName);
-            employee.setDepartment(departmentService.getById(departmentId));
+            Department department = departmentService.getById(departmentId);
+            employee.setDepartment(department);
 
             employeeService.insert(employee);
         } catch (SQLException e) {

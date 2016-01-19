@@ -1,9 +1,9 @@
 package evg.testt.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
-import java.util.List;
+import java.util.Set;
 
 @Entity(name = "departments")
 public class Department extends BaseModel {
@@ -11,16 +11,16 @@ public class Department extends BaseModel {
     private String name;
 
     //@OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Employee> employees;
+    //@OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "department")
+    private Set<Employee> employees;
 
-    public void addEmployee(Employee employee) {
-        employee.setDepartment(this);
-        employees.add(employee);
+    public Set<Employee> getEmployees() {
+        return employees;
     }
 
-    public List<Employee> getEmployees() {
-        return employees;
+    public void setEmployees(Set<Employee> employees) {
+        this.employees = employees;
     }
 
     public String getName() {

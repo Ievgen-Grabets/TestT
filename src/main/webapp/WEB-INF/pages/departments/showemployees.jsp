@@ -6,31 +6,19 @@
 </head>
 <body>
 
-</body>
-</html>
+<H1> Employees of the department '${department.name}'</H1>
 
-<%--
-
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html class="no-js">
-<head>
-    <title>All employees</title>
-</head>
 <table width="600px">
     <tr>
-        <td><b>FirstName</b></td> <td><b>SecondName</b></td> <td><b>Department</b></td>
+        <td><b>FirstName</b></td> <td><b>SecondName</b></td>
     </tr>
-    <c:forEach var="employee" items="${employees}">
+    <c:forEach var="employee" items="${department.employees}">
         <tr>
             <td>${employee.firstName}</td>
             <td>${employee.secondName}</td>
-            <td>${employee.department.name}</td>
-            <%-- <td><a href="/depEdit?id=${employee.id}">Edit</a> | <a href="/depDelete?id=${employee.id}">Delete</a></td> --%>
-</tr>
-</c:forEach>
+        </tr>
+    </c:forEach>
 </table>
-<hr/>
-<a href="/addEmployee">Add new one</a>
 
---%>
+</body>
+</html>
