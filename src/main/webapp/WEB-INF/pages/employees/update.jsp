@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -6,7 +7,8 @@
 </head>
 <body>
     <form method="post" action="/emplSaveUpdated">
-       <%-- <p>Department = ${employee.department.name}</p>--%>
+        <c:set var="department" value=${employee.department}>
+       <p>Department = ${department.name}</p>
         <table>
             <tr>
                 <td>First Name</td>
@@ -22,7 +24,7 @@
             </tr>
             <tr>
                 <td><input type="hidden" name="id" value=${employee.id}>
-                <input type="hidden" name="department_id" value=${employee.department.id}></td>
+                <input type="hidden" name="department_id" value=${department.id}></td>
                 <td><input type="submit" value="Apply"></td>
             </tr>
         </table>
