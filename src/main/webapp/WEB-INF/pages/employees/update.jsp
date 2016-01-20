@@ -6,9 +6,9 @@
     <title>EditEmployee</title>
 </head>
 <body>
-    <form method="post" action="/emplSaveUpdated">
-        <c:set var="department" value="${employee.department}" />
-       <p>Department = ${department.name}</p>
+    <form method="post" action="/emplSaveUpdated" modelAttribute="employee">
+        <%--<c:set var="department" value="${employee.department}" />--%>
+       <%--<p>Department = ${employee.department.name}</p>--%>
         <table>
             <tr>
                 <td>First Name</td>
@@ -24,7 +24,7 @@
             </tr>
             <tr>
                 <td><input type="hidden" name="id" value=${employee.id}>
-                <input type="hidden" name="department_id" value=${department.id}></td>
+                <input type="hidden" name="department_id" value="${employee.department.id}"></td>
                 <td><input type="submit" value="Apply"></td>
             </tr>
         </table>
