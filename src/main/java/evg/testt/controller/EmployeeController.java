@@ -50,7 +50,7 @@ public class EmployeeController {
         employee.setFirstName(firstName);
         employee.setSecondName(secondName);
         Department department = departmentService.getById(department_id);
-        employee.setDepartmennt(department);
+        employee.setDepartment(department);
         employeeService.insert(employee);
         return "redirect:/dep";
     }
@@ -74,7 +74,7 @@ public class EmployeeController {
                                  Long dayOfBirthday, Integer department_id) throws SQLException {
         Employee employee = new Employee();
         Department department = departmentService.getById(department_id);
-        employee.setDepartmennt(department);
+        employee.setDepartment(department);
         employee.setId(id);
         employee.setFirstName(firstName);
         employee.setSecondName(secondName);

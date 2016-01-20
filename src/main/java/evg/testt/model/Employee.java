@@ -20,9 +20,9 @@ public class Employee extends BaseModel{
 
     public void setDateOfBirthday(Date dateOfBirthday) { this.dateOfBirthday = dateOfBirthday; }
 
-    public Department getDepartmennt() { return department; }
+    public Department getDepartment() { return department; }
 
-    public void setDepartmennt(Department departmennt) { this.department = departmennt; }
+    public void setDepartment(Department department) { this.department = department; }
 
     public String getFirstName() {
         return firstName;

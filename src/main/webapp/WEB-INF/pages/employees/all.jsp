@@ -5,7 +5,7 @@
     <title>AllEmployee</title>
 </head>
 <body>
-    <p>Department = ${department.name}</p>
+    <p><b>Department = ${department.name}</b></p>
     <table>
         <tr>
             <td>First Name</td>
