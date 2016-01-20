@@ -1,9 +1,14 @@
 package evg.testt.service;
 
+import evg.testt.model.Department;
 import evg.testt.model.Employee;
 
-/**
- * Created by alex on 18.01.16.
- */
+import java.util.List;
+
 public interface EmployeeService extends Service<Employee> {
+
+    List<Employee> getByDepartment(Department department);
+
+    List<Employee> getByDepartment(Integer department);
+
 }

@@ -12,9 +12,8 @@
 </head>
 <body>
 
-  <h4>Home World !<h4/>
+  <h4>Home</h4>
+  <a href="/dep">Departments</a>
 
-  <a href="/dep">Department Edit<a/>
-  <a href="/empl">Employee Edit<a/>
-
+</body>
 </html>

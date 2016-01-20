@@ -7,8 +7,7 @@ public class JspPath {
 
     public static final String HOME = "home";
     public static final String DEPARTMENT_ALL = "departments/all";
-    public static final String DEPARTMENT_ADD = "departments/edit";
-    public static final String DEPARTMENT_UPDATE = "departments/update";
+    public static final String DEPARTMENT_EDIT = "departments/edit";
     public static final String EMPLOYEE_ALL = "employees/all";
     public static final String EMPLOYEE_EDIT = "employees/edit";
 
