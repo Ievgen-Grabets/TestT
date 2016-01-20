@@ -22,10 +22,6 @@
                 <td><input name="dateOfBirthday" type="text"></td>
             <tr>
             <tr>
-                <td>Choose department</td>
-                <td><input name="dateOfBirthday" type="text"></td>
-            <tr>
-            <tr>
                 <td><input type="hidden" name="department_id" value=${department.id}></td>
                 <td><input type="submit" value="Add new Employee"></td>
             </tr>

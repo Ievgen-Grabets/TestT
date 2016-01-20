@@ -3,6 +3,7 @@ package evg.testt.controller;
 import evg.testt.model.Department;
 import evg.testt.model.Employee;
 import evg.testt.service.DepartmentService;
+import evg.testt.service.EmployeeService;
 import evg.testt.util.JspPath;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,9 @@ public class DepartmentController {
 
     @Autowired
     DepartmentService departmentService;
+
+    @Autowired
+    EmployeeService employeeService;
 
     @RequestMapping(value = "/dep", method = RequestMethod.GET)
     public ModelAndView showAll() {
@@ -44,16 +48,19 @@ public class DepartmentController {
     public String addNewOne(@RequestParam(required = true) String name) throws SQLException {
         Department addedDepartment = new Department();
         addedDepartment.setName(name);
-        addedDepartment.setEmployees(new ArrayList<Employee>());
         departmentService.insert(addedDepartment);
         return "redirect:/dep";
     }
 
     @RequestMapping(value = "/depDelete", method = RequestMethod.POST)
     public String deleteOne(@RequestParam(required = true) Integer id) throws SQLException {
-        Department departmentForDelete = new Department();
-        departmentForDelete.setId(id);
-        departmentService.delete(departmentForDelete);
+        Department departmentForDelete = departmentService.getById(id);
+        if (departmentForDelete.getEmployees() != null) {
+            for(int i = 0; i < departmentForDelete.getEmployees().size(); i++) {
+                employeeService.delete(departmentForDelete.getEmployees().get(i));
+            }
+        }
+        departmentService.delete(departmentService.getById(id));
         return "redirect:/dep";
     }
 

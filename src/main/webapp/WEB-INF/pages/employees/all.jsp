@@ -32,7 +32,7 @@
         </tr>
         </c:forEach>
     </table>
-    <a href="/emplAdd?department_id=${employee.department.id}">Add new Employye</a><br /><br />
+    <a href="/emplAdd?department_id=${department.id}">Add new Employye</a><br /><br />
     <a href="/">Home</a>
 </body>
 </html>

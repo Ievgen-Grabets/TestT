@@ -8,7 +8,7 @@
 <body>
 <table width="600px">
   <tr>
-    <td><b>Name</b></td>
+    <td><b>Department name</b></td>
   </tr>
   <c:forEach var="department" items="${departments}">
     <tr>

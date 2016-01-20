@@ -31,19 +31,6 @@ public class EmployeeController {
     @RequestMapping(value = "/empl", method = RequestMethod.GET)
     public ModelAndView showAll(Integer department_id) throws SQLException {
         Department department = departmentService.getById(department_id);
-        /*List<Employee> allEmployees;
-        try {
-            allEmployees = employeeService.getAll();
-        } catch (SQLException e) {
-            allEmployees = Collections.emptyList();
-            e.printStackTrace();
-        }
-        List<Employee> employees = new ArrayList<>();
-        for (Employee employee : allEmployees) {
-            if (employee.getDepartmennt() != null && employee.getDepartmennt().equals(department)) {
-                employees.add(employee);
-            }
-        }*/
         return new ModelAndView(JspPath.EMPLOYEE_ALL, "department", department);
     }
 
@@ -55,16 +42,17 @@ public class EmployeeController {
 
 
     @RequestMapping(value = "/emplSave", method = RequestMethod.POST)
-    public ModelAndView addNewOne(String firstName, String secondName, Long dateOfBirthday,
+    public String addNewOne(String firstName, String secondName, Long dateOfBirthday,
                             Integer department_id) throws SQLException {
         Employee employee = new Employee();
         Date birthdayDay = new Date(dateOfBirthday);
         employee.setDateOfBirthday(birthdayDay);
         employee.setFirstName(firstName);
         employee.setSecondName(secondName);
-        employee.setDepartmennt(departmentService.getById(department_id));
+        Department department = departmentService.getById(department_id);
+        employee.setDepartmennt(department);
         employeeService.insert(employee);
-        return new ModelAndView(JspPath.EMPLOYEE_ALL, "department", employee.getDepartmennt());
+        return "redirect:/dep";
     }
 
     @RequestMapping(value = "/emplDelete",method = RequestMethod.POST)
@@ -72,26 +60,28 @@ public class EmployeeController {
         Employee employee = new Employee();
         employee.setId(id);
         employeeService.delete(employee);
-        return "redirect:/empl";
+        return "redirect:/dep";
     }
 
     @RequestMapping(value = "/emplUpdate",method = RequestMethod.POST)
     public ModelAndView updateOne(@RequestParam(required = true) Integer id) throws SQLException {
         Employee employee = employeeService.getById(id);
-        return new ModelAndView(JspPath.EMPLOYEE_UPDATE, "employeeForUpdate", employee);
+        return new ModelAndView(JspPath.EMPLOYEE_UPDATE, "employee", employee);
     }
 
     @RequestMapping(value = "/emplSaveUpdated",method = RequestMethod.POST)
     public String saveUpdatedOne(@RequestParam(required = true) Integer id, String firstName, String secondName,
-                                 Long dayOfBirthday) throws SQLException {
+                                 Long dayOfBirthday, Integer department_id) throws SQLException {
         Employee employee = new Employee();
+        Department department = departmentService.getById(department_id);
+        employee.setDepartmennt(department);
         employee.setId(id);
         employee.setFirstName(firstName);
         employee.setSecondName(secondName);
         Date date = new Date(dayOfBirthday);
         employee.setDateOfBirthday(date);
         employeeService.update(employee);
-        return "redirect:/empl";
+        return "redirect:/dep";
     }
 
 }
