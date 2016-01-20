@@ -1,4 +1,4 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>--%>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -7,7 +7,7 @@
 </head>
 <body>
     <form method="post" action="/emplSaveUpdated">
-        <c:set var="department" value=${employee.department}>
+        <c:set var="department" value="${employee.department}" />
        <p>Department = ${department.name}</p>
         <table>
             <tr>
