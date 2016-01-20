@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title></title>
+    <title>AddDepartment</title>
 </head>
 <body>
 <form:form method="post" action="/depSave">
@@ -13,7 +13,6 @@
         </tr>
         <tr>
             <td colspan="2">
-                <input type="hidden" name="id" value=${departmentForUpdate.id}>
                 <input type="submit" value="Add new Department">
             </td>
         </tr>

@@ -1,6 +1,9 @@
 package evg.testt.model;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.util.Date;
 
 @Entity(name = "employees")
@@ -8,16 +11,18 @@ public class Employee extends BaseModel{
 
     private String firstName;
     private String secondName;
- //   private Department departmennt;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "department_id", nullable = false)
+    private Department department;
     private Date dateOfBirthday;
 
     public Date getDateOfBirthday() { return dateOfBirthday;  }
 
     public void setDateOfBirthday(Date dateOfBirthday) { this.dateOfBirthday = dateOfBirthday; }
 
- //   public Department getDepartmennt() { return departmennt; }
+    public Department getDepartmennt() { return department; }
 
-  //  public void setDepartmennt(Department departmennt) { this.departmennt = departmennt; }
+    public void setDepartmennt(Department departmennt) { this.department = departmennt; }
 
     public String getFirstName() {
         return firstName;
