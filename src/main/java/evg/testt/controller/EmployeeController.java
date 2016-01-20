@@ -34,7 +34,9 @@ public class EmployeeController{
     }
 
     @RequestMapping(value = "/employeeSaveOrUpdate", method = RequestMethod.POST)
-    public String addNewOne(@ModelAttribute Employee employee) throws SQLException {
+    public String addNewOne(@ModelAttribute Employee employee, @RequestParam(required = true) Integer departmentId) throws SQLException {
+        Department department = departmentService.getById(departmentId);
+        employee.setDepartment(department);
         if(employee.getId()!=null){
             employeeService.insert(employee);
         }else{
@@ -55,6 +57,13 @@ public class EmployeeController{
         }
         modelAndView.addObject("employee", employee);
         return modelAndView;
+    }
+
+    @RequestMapping(value = "/employeeDelete", method = RequestMethod.POST)
+    public String deleteOne(@RequestParam(required = true) Integer id) throws SQLException {
+        Employee employee = employeeService.getById(id);
+        employeeService.delete(employee);
+        return "redirect:/dep";
     }
 
 }

@@ -15,12 +15,13 @@
         <td>${employee.secondName}</td>
         <td>${employee.age}</td>
         <td>
-            <form method="post" action="/depDelete">
+            <form method="post" action="/employeeDelete">
                 <input type="hidden" name="id" value=${employee.id}>
                 <input type="submit" value="Delete">
             </form>
         </td>
-        <td><form method="post" action="/depEdit">
+        <td>
+         <form method="post" action="/employeeEdit">
             <input type="hidden" name="id" value=${employee.id}>
             <input type="submit" value="Update">
         </form>
@@ -30,6 +31,7 @@
     <tr>
         <td colspan="5">
             <form method="post" action="/employeeEdit">
+                <input type="hidden" name="department_id" value=${department.id}>
                 <input type="submit" value="Add new employee">
             </form>
         </td>
