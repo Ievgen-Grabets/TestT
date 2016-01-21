@@ -25,10 +25,10 @@ public class MainController {
     private ContactService contactService;
 
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)                                                            //изменил название value с "/" на "/cont"
     public ModelAndView showAll(HttpServletRequest request, HttpServletResponse response) {
-        //ModelAndView modelAndView = new ModelAndView("contacts/all");
-        //modelAndView.addObject("contacts", contactService.getAll());
+//        ModelAndView modelAndView = new ModelAndView("contacts/all");
+//        modelAndView.addObject("contacts", contactService.getAll());
         HttpSession session = request.getSession();
         return new ModelAndView(JspPath.HOME);
     }

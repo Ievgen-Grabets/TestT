@@ -5,6 +5,7 @@ import evg.testt.service.DepartmentService;
 import evg.testt.util.JspPath;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -49,6 +50,46 @@ public class DepartmentController {
         }
         return "redirect:/dep";
     }
+
+    @RequestMapping(value = "/depEdit", method = RequestMethod.GET)
+    public ModelAndView showd(@RequestParam(required = true) int id) {
+        Department department = null;
+        try {
+             department = departmentService.getById(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return new ModelAndView(JspPath.DEPARTMENT_UPDATE, "sas", department);
+    }
+
+    @RequestMapping(value = "/depUpdate", method = RequestMethod.POST)
+    public String updateName (@ModelAttribute Department department) {
+        try {
+            departmentService.update(department);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+
+        return "redirect:/dep";
+    }
+
+
+    @RequestMapping(value = "/depDelete", method = RequestMethod.GET)
+    public String NewOne(@RequestParam(required = true) int id) {
+        Department addedDepartment = new Department();
+        addedDepartment.setId(id);
+        try {
+            departmentService.delete(addedDepartment);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return "redirect:/dep";
+    }
+
+
 
 
 }

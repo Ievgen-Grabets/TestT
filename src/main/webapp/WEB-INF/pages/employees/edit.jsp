@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: user
@@ -11,6 +12,20 @@
     <title></title>
 </head>
 <body>
-
+<form:form method="post" action="/empSave">
+    <table>
+        <tr>
+            <td>Name:</td>
+            <td><input type="text" name="name"/></td>
+            <td>Surname:</td>
+            <td><input type="text", name="surname"> </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" />
+            </td>
+        </tr>
+    </table>
+</form:form>
 </body>
 </html>
