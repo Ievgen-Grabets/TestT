@@ -6,9 +6,10 @@
 </head>
 <body>
 
-  <h2>Home World !</h2>
+  <h4>Home World !</h4>
 
-  <a href="/dep">Departments</a>
+  <a href="/dep">Departments</a><br><br>
+  <a href="/translMain">Translator</a>
 
 </body>
 </html>

@@ -5,6 +5,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import java.util.Date;
+import java.util.Set;
 
 @Entity(name = "employees")
 public class Employee extends BaseModel{
