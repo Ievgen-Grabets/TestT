@@ -15,4 +15,4 @@ public class Department extends BaseModel{
         this.name = name;
     }
 
-}
+ }
