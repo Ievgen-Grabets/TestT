@@ -12,7 +12,7 @@
     <tr>
       <td>${department.name}</td>
       <td>${department.id}</td>
-      <td><a href="/depAdd?id=${department.id}">Edit</a> | <a href="/delete?id=${department.id}">Delete</a> </td>
+      <td><a href="/depEdit?id=${department.id}">Edit</a> | <a href="/depDelete?id=${department.id}">Delete</a> </td>
     </tr>
   </c:forEach>
   <tr>
