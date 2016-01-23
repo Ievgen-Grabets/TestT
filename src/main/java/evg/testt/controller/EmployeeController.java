@@ -52,13 +52,16 @@ public class EmployeeController {
 
     @RequestMapping(value = "/addEmployee", method = RequestMethod.GET)
     public ModelAndView addNew() {
-        return makeModelAndViewForEdit(new Employee());
+        ModelAndView modelAndView = makeModelAndViewForEdit(new Employee());
+        modelAndView.addObject("title","Add a new employee");
+        return modelAndView;
     }
 
     private ModelAndView makeModelAndViewForEdit(Employee editEmployee) {
         List<Department> departments = getDepartments();
 
-        ModelAndView modelAndView = new ModelAndView(JspPath.EMPLOYEE_ADD);
+        ModelAndView modelAndView = new ModelAndView(JspPath.EMPLOYEES_UPDATE);
+
         modelAndView.addObject("departments",departments);
         modelAndView.addObject("editEmployee", editEmployee);
 
@@ -68,7 +71,9 @@ public class EmployeeController {
     @RequestMapping(value = "/editEmployee", method = RequestMethod.GET)
     public ModelAndView edit(@RequestParam(required = true) Integer id) {
         try {
-            return makeModelAndViewForEdit(employeeService.getById(id));
+            ModelAndView modelAndView = makeModelAndViewForEdit(employeeService.getById(id));
+            modelAndView.addObject("title","Edit a employee");
+            return modelAndView;
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -3,7 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Add new employee</title>
+    <title>${title}</title>
 </head>
 <body>
 
@@ -30,10 +30,6 @@
             </form:select></td>
         </tr>
 
-       <%-- <tr>
-            <td>E-mail:</td>
-            <td><form:input path="email" /></td>
-        </tr>  --%>
         <tr>
             <td colspan="3">
                 <input type="submit" />
