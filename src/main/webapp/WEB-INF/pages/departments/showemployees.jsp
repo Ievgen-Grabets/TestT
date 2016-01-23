@@ -5,7 +5,6 @@
     <title>Employees of the department</title>
 </head>
 <body>
-
 <c:choose>
     <c:when test="${employeesCount > 0}">
         <jsp:include page="employeeslist.jsp"/>
