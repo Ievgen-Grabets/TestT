@@ -9,7 +9,7 @@
   <h4>Home World !</h4>
 
   <a href="/dep">Departments</a><br><br>
-  <a href="/translMain">Translator</a>
+  <a href="/translate">Translator</a>
 
 </body>
 </html>

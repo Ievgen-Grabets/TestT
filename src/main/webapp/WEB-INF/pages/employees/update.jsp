@@ -6,7 +6,7 @@
     <title>EditEmployee</title>
 </head>
 <body>
-    <form method="post" action="/emplSaveUpdated">
+    <form method="post" action="/empl/SaveUpdated">
         <p><b>Department = ${employee.department.name}</b></p>
         <table>
             <tr>

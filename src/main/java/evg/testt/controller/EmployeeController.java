@@ -20,6 +20,7 @@ import java.util.List;
 
 
 @Controller
+@RequestMapping(value = "/empl")
 public class EmployeeController {
 
     @Autowired
@@ -28,20 +29,20 @@ public class EmployeeController {
     @Autowired
     DepartmentService departmentService;
 
-    @RequestMapping(value = "/empl", method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public ModelAndView showAll(Integer department_id) throws SQLException {
         Department department = departmentService.getById(department_id);
         return new ModelAndView(JspPath.EMPLOYEE_ALL, "department", department);
     }
 
-    @RequestMapping(value = "/emplAdd", method = RequestMethod.GET)
+    @RequestMapping(value = "/Add", method = RequestMethod.GET)
     public ModelAndView showAdd(Integer department_id) throws SQLException {
         Department department = departmentService.getById(department_id);
         return new ModelAndView(JspPath.EMPLOYEE_ADD, "department", department);
     }
 
 
-    @RequestMapping(value = "/emplSave", method = RequestMethod.POST)
+    @RequestMapping(value = "/Save", method = RequestMethod.POST)
     public String addNewOne(String firstName, String secondName, Long dateOfBirthday,
                             Integer department_id) throws SQLException {
         Employee employee = new Employee();
@@ -55,7 +56,7 @@ public class EmployeeController {
         return "redirect:/dep";
     }
 
-    @RequestMapping(value = "/emplDelete",method = RequestMethod.POST)
+    @RequestMapping(value = "/Delete",method = RequestMethod.POST)
     public String deleteOne(@RequestParam(required = true) Integer id) throws SQLException {
         Employee employee = new Employee();
         employee.setId(id);
@@ -63,13 +64,13 @@ public class EmployeeController {
         return "redirect:/dep";
     }
 
-    @RequestMapping(value = "/emplUpdate",method = RequestMethod.POST)
+    @RequestMapping(value = "/Update",method = RequestMethod.POST)
     public ModelAndView updateOne(@RequestParam(required = true) Integer id) throws SQLException {
         Employee employee = employeeService.getById(id);
         return new ModelAndView(JspPath.EMPLOYEE_UPDATE, "employee", employee);
     }
 
-    @RequestMapping(value = "/emplSaveUpdated",method = RequestMethod.POST)
+    @RequestMapping(value = "/SaveUpdated",method = RequestMethod.POST)
     public String saveUpdatedOne(@RequestParam(required = true) Integer id, String firstName, String secondName,
                                  Long dayOfBirthday, Integer department_id) throws SQLException {
         Employee employee = new Employee();

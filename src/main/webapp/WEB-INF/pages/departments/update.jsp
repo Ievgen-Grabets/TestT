@@ -5,7 +5,7 @@
     <title>EditDepartment</title>
 </head>
 <body>
-    <form method="post" action="/depSaveUpdated">
+    <form method="post" action="/dep/SaveUpdated">
         <table>
             <tr>
                 <td>Old name of Deparyment is:</td>

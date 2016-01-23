@@ -1,9 +1,10 @@
 package evg.testt.model;
 
-/**
- * Created by alex on 21.01.16.
- */
-public class Language {
+
+import javax.persistence.Entity;
+
+@Entity(name = "languages")
+public class Language extends BaseModel{
 
     String languageName;
     String languageAtribute;

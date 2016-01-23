@@ -1,12 +1,12 @@
-package evg.testt.model;
+package evg.testt.dto;
+
+
+import evg.testt.model.Language;
 
 import java.util.Set;
 
-/**
- * Created by alex on 21.01.16.
- */
 
-public class Translator extends BaseModel {
+public class TranslatorDto {
 
     private String languageIn;
     private String languageOut;

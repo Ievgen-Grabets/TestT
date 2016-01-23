@@ -6,7 +6,7 @@
 </head>
 <body>
     <h2>Enter new Employee</h2>
-    <form method="post" action="/emplSave">
+    <form method="post" action="/empl/Save">
         <p>Department = ${department.name}</p>
         <table>
             <tr>

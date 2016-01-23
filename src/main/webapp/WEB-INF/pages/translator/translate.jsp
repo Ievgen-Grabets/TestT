@@ -8,21 +8,35 @@
 <body>
     <h5><b>We are will trnslate here !!</b></h5>
 
-    <form action="/doTransl" method="post">
-        Input Language: ${translator.languageIn}
+    <form action="/translate/doTransl" method="post">
+        Input Language:
         <select name="languageIn">
-            <c:forEach var="language" items="${translator.languages}">
-                <option>${language.languageName}</option>
+            <c:forEach var="language" items="${translatorDto.languages}">
+                <c:choose>
+                    <c:when test="${translatorDto.languageIn == language.languageName}">
+                        <option selected>${language.languageName}</option>
+                    </c:when>
+                    <c:otherwise>
+                        <option>${language.languageName}</option>
+                    </c:otherwise>
+                </c:choose>
             </c:forEach>
         </select><br>
-        <textarea rows="7" cols="70" name="textIn" autofocus maxlength="350">${translator.textIn}</textarea><br><br>
-        Output Language: ${translator.languageOut}
+        <textarea rows="7" cols="70" name="textIn" autofocus maxlength="350">${translatorDto.textIn}</textarea><br><br>
+        Output Language:
         <select name="languageOut">
-            <c:forEach var="language" items="${translator.languages}">
-                <option>${language.languageName}</option>
+            <c:forEach var="language" items="${translatorDto.languages}">
+                <c:choose>
+                    <c:when test="${translatorDto.languageOut == language.languageName}">
+                        <option selected>${language.languageName}</option>
+                    </c:when>
+                    <c:otherwise>
+                        <option>${language.languageName}</option>
+                    </c:otherwise>
+                </c:choose>
             </c:forEach>
         </select><br>
-        <textarea rows="7" cols="70" name="textOut" readonly>${translator.textOut}</textarea><br><br>
+        <textarea rows="7" cols="70" name="textOut" readonly>${translatorDto.textOut}</textarea><br><br>
         <input type="submit" value="Translate !">
     </form>
 

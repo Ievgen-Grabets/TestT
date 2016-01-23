@@ -5,7 +5,7 @@
     <title>AddDepartment</title>
 </head>
 <body>
-<form:form method="post" action="/depSave">
+<form:form method="post" action="/dep/Save">
     <table>
         <tr>
             <td>Name:</td>

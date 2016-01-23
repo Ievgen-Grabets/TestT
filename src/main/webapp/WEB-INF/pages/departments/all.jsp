@@ -14,13 +14,13 @@
     <tr>
       <td><a href="/empl?department_id=${department.id}">${department.name}</a></td>
       <td>
-        <form method="post" action="/depDelete">
+        <form method="post" action="/dep/Delete">
           <input type="hidden" name="id" value=${department.id}>
           <input type="submit" value="Delete">
         </form>
       </td>
       <td>
-        <form method="post" action="/depUpdate">
+        <form method="post" action="/dep/Update">
           <input type="hidden" name="id" value=${department.id}>
           <input type="submit" value="Update">
         </form>
@@ -28,7 +28,8 @@
     </tr>
   </c:forEach>
 </table>
-<a href="/depAdd">Add new one</a>
+<br>
+<a href="/dep/Add">Add new one</a>
 <br><br>
 <a href="/">Home</a>
 </body>

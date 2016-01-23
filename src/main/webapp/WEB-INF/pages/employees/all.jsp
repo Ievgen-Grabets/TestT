@@ -18,13 +18,13 @@
                 <td>${employee.secondName}</td>
                 <td>${employee.dateOfBirthday}</td>
                 <td>
-                    <form method="post" action="/emplDelete">
+                    <form method="post" action="/empl/Delete">
                        <input type="hidden" name="id" value=${employee.id}>
                        <input type="submit" value="Delete">
                     </form>
                 </td>
                 <td>
-                    <form method="post" action="/emplUpdate">
+                    <form method="post" action="/empl/Update">
                        <input type="hidden" name="id" value=${employee.id}>
                        <input type="submit" value="Update">
                     </form>
@@ -32,7 +32,8 @@
         </tr>
         </c:forEach>
     </table>
-    <a href="/emplAdd?department_id=${department.id}">Add new Employye</a><br /><br />
+    <br>
+    <a href="/empl/Add?department_id=${department.id}">Add new Employye</a><br /><br />
     <a href="/">Home</a>
 </body>
 </html>

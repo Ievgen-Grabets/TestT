@@ -19,6 +19,7 @@ import java.util.List;
 import java.sql.SQLException;
 
 @Controller
+@RequestMapping(value = "/dep")
 public class DepartmentController {
 
     @Autowired
@@ -27,7 +28,7 @@ public class DepartmentController {
     @Autowired
     EmployeeService employeeService;
 
-    @RequestMapping(value = "/dep", method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public ModelAndView showAll() {
         List<Department> departments = null;
         try {
@@ -39,12 +40,12 @@ public class DepartmentController {
         return new ModelAndView(JspPath.DEPARTMENT_ALL, "departments", departments);
     }
 
-    @RequestMapping(value = "/depAdd", method = RequestMethod.GET)
+    @RequestMapping(value = "/Add", method = RequestMethod.GET)
     public ModelAndView showAdd() {
         return new ModelAndView(JspPath.DEPARTMENT_ADD);
     }
 
-    @RequestMapping(value = "/depSave", method = RequestMethod.POST)
+    @RequestMapping(value = "/Save", method = RequestMethod.POST)
     public String addNewOne(@RequestParam(required = true) String name) throws SQLException {
         Department addedDepartment = new Department();
         addedDepartment.setName(name);
@@ -52,7 +53,7 @@ public class DepartmentController {
         return "redirect:/dep";
     }
 
-    @RequestMapping(value = "/depDelete", method = RequestMethod.POST)
+    @RequestMapping(value = "/Delete", method = RequestMethod.POST)
     public String deleteOne(@RequestParam(required = true) Integer id) throws SQLException {
         Department departmentForDelete = departmentService.getById(id);
         if (departmentForDelete.getEmployees() != null) {
@@ -64,13 +65,13 @@ public class DepartmentController {
         return "redirect:/dep";
     }
 
-    @RequestMapping(value = "/depUpdate", method = RequestMethod.POST)
+    @RequestMapping(value = "/Update", method = RequestMethod.POST)
     public ModelAndView updeteOne(@RequestParam(required = true) Integer id) throws SQLException {
         Department departmentForUpdate = departmentService.getById(id);
         return new ModelAndView(JspPath.DEPARTMENT_UPDATE,"departmentForUpdate", departmentForUpdate);
     }
 
-    @RequestMapping(value = "/depSaveUpdated", method = RequestMethod.POST)
+    @RequestMapping(value = "/SaveUpdated", method = RequestMethod.POST)
     public String updateOne(@RequestParam(required = true) Integer id, @RequestParam(required = true) String name) throws SQLException {
         Department departmentUpdated = new Department();
         departmentUpdated.setId(id);
@@ -78,7 +79,6 @@ public class DepartmentController {
         departmentService.update(departmentUpdated);
         return "redirect:/dep";
     }
-
 
 
 }
