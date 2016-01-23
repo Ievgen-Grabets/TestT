@@ -6,19 +6,14 @@
 </head>
 <body>
 
-<H1> Employees of the department '${department.name}'</H1>
-
-<table width="600px">
-    <tr>
-        <td><b>FirstName</b></td> <td><b>SecondName</b></td>
-    </tr>
-    <c:forEach var="employee" items="${department.employees}">
-        <tr>
-            <td>${employee.firstName}</td>
-            <td>${employee.secondName}</td>
-        </tr>
-    </c:forEach>
-</table>
+<c:choose>
+    <c:when test="${employeesCount > 0}">
+        <jsp:include page="employeeslist.jsp"/>
+    </c:when>
+    <c:otherwise>
+        The department '${department.name}' has no any employees
+    </c:otherwise>
+</c:choose>
 
 </body>
 </html>

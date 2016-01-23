@@ -78,7 +78,10 @@ public class DepartmentController {
             department = new Department();
         }
 
-        return new ModelAndView(JspPath.DEPARTMENT_ALL_EMPLOYEES, "department", department);
+        ModelAndView modelAndView = new ModelAndView(JspPath.DEPARTMENT_ALL_EMPLOYEES, "department", department);
+        modelAndView.addObject("employeesCount",department.getEmployees().size());
+
+        return modelAndView;
     }
 
 
