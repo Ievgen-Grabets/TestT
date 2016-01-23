@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 public abstract class BaseService <T , P extends JpaRepository<T,Integer>> implements Service<T> {
-
     protected  P dao;
 
     @Autowired
