@@ -1,7 +1,6 @@
 package evg.testt.controller;
 
 import evg.testt.model.Department;
-import evg.testt.model.Employee;
 import evg.testt.service.DepartmentService;
 import evg.testt.util.JspPath;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 import java.sql.SQLException;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 @Controller
 public class DepartmentController {
@@ -37,13 +35,23 @@ public class DepartmentController {
 
     @RequestMapping(value = "/depAdd", method = RequestMethod.GET)
     public ModelAndView showAdd() {
-        return new ModelAndView(JspPath.DEPARTMENT_ADD);
+        ModelAndView modelAndView = makeModelAndViewForEdit(new Department());
+        modelAndView.addObject("title","Add a new department");
+        return modelAndView;
+    }
+
+    private ModelAndView makeModelAndViewForEdit(Department department) {
+        ModelAndView modelAndView = new ModelAndView(JspPath.DEPARTMENT_UPDATE);
+        modelAndView.addObject("department",department);
+        return modelAndView;
     }
 
     @RequestMapping(value = "/depEdit", method = RequestMethod.GET)
-    public ModelAndView editOne(@RequestParam(required = true) Integer id) {
+    public ModelAndView edit(@RequestParam(required = true) Integer id) {
         try {
-            return new ModelAndView(JspPath.DEPARTMENT_EDIT,"department", departmentService.getById(id));
+            ModelAndView modelAndView = makeModelAndViewForEdit(departmentService.getById(id));
+            modelAndView.addObject("title","Edit a department");
+            return modelAndView;
         } catch (SQLException e) {
             e.printStackTrace();
             return showAll();
@@ -70,23 +78,9 @@ public class DepartmentController {
             department = new Department();
         }
 
-        Set<Employee> employees = department.getEmployees();
         return new ModelAndView(JspPath.DEPARTMENT_ALL_EMPLOYEES, "department", department);
     }
 
-/*
-    @RequestMapping(value = "/depUpdate", method = RequestMethod.POST)
-    public String updateOne(@ModelAttribute Department department) {
-        try {
-            Department d = new Department();
-            d.setId(11111);
-            departmentService.update(d);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return "redirect:/dep";
-    }
-*/
 
     @RequestMapping(value = "/depDelete", method = RequestMethod.GET)
     public String deleteDep(@RequestParam(required = true) Integer id) {

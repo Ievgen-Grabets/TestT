@@ -2,14 +2,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title></title>
+    <title>${title}</title>
 </head>
 <body>
-<form:form method="post" action="/depSave">
+
+<form:form method="post" action="/depUpdate" modelAttribute="department">
+    <form:hidden path="id" value="${department.id}"/>
     <table>
         <tr>
             <td>Name:</td>
-            <td><input type="text" name="name"/></td>
+            <td><form:input path="name" value="${department.name}"/></td>
         </tr>
         <tr>
             <td colspan="2">
