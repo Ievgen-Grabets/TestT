@@ -10,6 +10,9 @@
 <head>
   <title>Hello world</title>
 </head>
+<td colspan="5">
+  <a href="/dep">Dep</a>
+</td>
 <body>
 
   Home World !
