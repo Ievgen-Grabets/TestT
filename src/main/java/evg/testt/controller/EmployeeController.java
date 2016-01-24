@@ -5,6 +5,7 @@ import evg.testt.model.Employee;
 import evg.testt.service.EmployeeService;
 import evg.testt.util.JspPath;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,8 +16,10 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Created by funtusthan on 24.01.16.
+ * Created by funtusthan on 17.01.16.
  */
+
+@Controller
 public class EmployeeController {
 
     @Autowired

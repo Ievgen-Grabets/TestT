@@ -1,9 +1,6 @@
 package evg.testt.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -14,7 +11,7 @@ public class Department extends BaseModel{
     private String name;
 
     @OneToMany(mappedBy = "dep")
-    private List<Employee> employees;
+    private List <Employee> employees;
 
     public List<Employee> getEmployees() {
         return employees;

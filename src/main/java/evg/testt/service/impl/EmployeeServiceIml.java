@@ -1,11 +1,13 @@
 package evg.testt.service.impl;
 
-import evg.testt.dao.DepartmentDao;
-import evg.testt.model.Department;
-import evg.testt.service.DepartmentService;
+import evg.testt.dao.EmployeeDao;
+import evg.testt.model.Employee;
+import evg.testt.service.EmployeeService;
+import org.springframework.stereotype.Service;
 
 /**
  * Created by funtusthan on 24.01.16.
  */
-public class EmployeeServiceIml extends BaseService<Department, DepartmentDao> implements DepartmentService{
+@Service
+public class EmployeeServiceIml extends BaseService<Employee, EmployeeDao> implements EmployeeService{
 }
