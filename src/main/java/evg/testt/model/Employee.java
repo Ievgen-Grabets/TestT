@@ -1,6 +1,8 @@
 package evg.testt.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import java.util.Date;
 
@@ -11,7 +13,7 @@ public class Employee extends BaseModel{
     private String secondName;
     private Date date;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private Department department;
 
     public Department getDepartment() {return department;}

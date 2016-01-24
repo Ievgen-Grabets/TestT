@@ -110,10 +110,12 @@ public class EmployeesController {
     public String delete(@RequestParam(required = true) int empId) throws SQLException {
         Employee delEmployee = employeesService.getById(empId);
         Department department = delEmployee.getDepartment();
-        int depId = department.getId();
+        Integer depId = department.getId();
         department.getEmployees().remove(delEmployee);
         employeesService.delete(delEmployee);
+        //employeesService.update(delEmployee);
         //departmentService.update(department);
-        return "redirect:/emp";///depEmp?depId="+depId;
+       // return "redirect:/dep";
+        return "redirect:/depEmp?depId="+depId;
     }
 }
