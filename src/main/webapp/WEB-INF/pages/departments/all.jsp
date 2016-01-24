@@ -26,5 +26,9 @@
     <td colspan="5">
       <a href="/depAdd">Add new one</a>
     </td>
+    <td></td>
+    <td colspan="5">
+      <a href="/emp">All Employees</a>
+    </td>
   </tr>
 </table>

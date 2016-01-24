@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.sql.SQLException;
 import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Controller
@@ -24,6 +25,18 @@ public class EmployeesController {
     DepartmentService departmentService;
     @Autowired
     EmployeesService employeesService;
+
+    @RequestMapping(value = "/emp", method = RequestMethod.GET)
+    public ModelAndView showAllEmp() {
+        List<Employee> employees;
+        try {
+            employees = employeesService.getAll();
+        } catch (SQLException e) {
+            employees = Collections.emptyList();
+            e.printStackTrace();
+        }
+        return new ModelAndView(JspPath.EMPLOYEES_ALL, "employees", employees);
+    }
 
     @RequestMapping(value = "/depEmp", method = RequestMethod.GET)
     public ModelAndView showAll(@RequestParam(required = true) int depId) {
@@ -42,6 +55,8 @@ public class EmployeesController {
     public ModelAndView showAdd(@RequestParam(required = true) int depId) {
         return new ModelAndView(JspPath.EMPLOYEES_ADD);
     }
+
+    //@RequestMapping(value = "/emp", method = R)
 
     @RequestMapping(value = "/empSave", method = RequestMethod.POST)
     public String addNewOne(@RequestParam(required = true) String firstName,
@@ -92,19 +107,13 @@ public class EmployeesController {
     }
 
     @RequestMapping(value = "/empDel", method = RequestMethod.POST)
-    public String delete(@RequestParam(required = true) int empId) {
-        Integer depId = null;
-        try {
-            Employee delEmployee = employeesService.getById(empId);
-            Department department = delEmployee.getDepartment();
-            depId = department.getId();
-
-            employeesService.delete(delEmployee);
-            department.getEmployees().remove(delEmployee);
-            //departmentService.update(department);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return "redirect:/depEmp?depId="+depId;
+    public String delete(@RequestParam(required = true) int empId) throws SQLException {
+        Employee delEmployee = employeesService.getById(empId);
+        Department department = delEmployee.getDepartment();
+        int depId = department.getId();
+        department.getEmployees().remove(delEmployee);
+        employeesService.delete(delEmployee);
+        //departmentService.update(department);
+        return "redirect:/emp";///depEmp?depId="+depId;
     }
 }
