@@ -1,7 +1,9 @@
 package evg.testt.controller;
 
 import evg.testt.model.Department;
+import evg.testt.model.Employee;
 import evg.testt.service.DepartmentService;
+import evg.testt.service.EmployeesService;
 import evg.testt.util.JspPath;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,12 +16,15 @@ import java.util.Collections;
 import java.util.List;
 
 import java.sql.SQLException;
+import java.util.Set;
 
 @Controller
 public class DepartmentController {
 
     @Autowired
     DepartmentService departmentService;
+    @Autowired
+    EmployeesService employeesService;
 
     @RequestMapping(value = "/dep", method = RequestMethod.GET)
     public ModelAndView showAll() {
@@ -78,8 +83,21 @@ public class DepartmentController {
 
     @RequestMapping(value = "/depDel", method = RequestMethod.POST)
     public String delete(@RequestParam(required = true) int depId) {
-        Department delDepartment = new Department();
-        delDepartment.setId(depId);
+        Department delDepartment = null;
+        try{
+            delDepartment = departmentService.getById(depId);
+        }catch(SQLException e) {
+            e.printStackTrace();
+        }
+        Set<Employee> delEmployees = delDepartment.getEmployees();
+      //Set<Employee> clonedDelEmployees = delEmployees.
+        for (Employee delEmployee:delEmployees){
+            try{
+                employeesService.delete(delEmployee);
+            }catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
         try {
             departmentService.delete(delDepartment);
         } catch (SQLException e) {
