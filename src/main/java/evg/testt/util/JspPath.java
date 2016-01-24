@@ -6,7 +6,12 @@ package evg.testt.util;
 public class JspPath {
 
     public static final String HOME = "home";
+
     public static final String DEPARTMENT_ALL = "departments/all";
     public static final String DEPARTMENT_ADD = "departments/edit";
+    public static final String DEPARTMENT_UPDATE = "departments/update";
 
+    public static final String EMPLOYEE_ALL = "employees/all";
+    public static final String EMPLOYEE_ADD = "employees/edit";
+    public static final String EMPLOYEE_UPDATE = "employees/update";
 }

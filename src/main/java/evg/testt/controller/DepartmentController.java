@@ -50,5 +50,35 @@ public class DepartmentController {
         return "redirect:/dep";
     }
 
+    @RequestMapping(value = "/depUpdate", method = RequestMethod.GET)
+    public ModelAndView showUpdate(@RequestParam(required = true) Integer id) throws SQLException {
+        Department department = departmentService.getById(id);
+        return new ModelAndView(JspPath.DEPARTMENT_UPDATE, "department", department);
+    }
 
+    @RequestMapping(value = "/depUpdateNow", method = RequestMethod.POST)
+    public String updateOne(@RequestParam(required = true) String name,
+                            @RequestParam(required = true) Integer id) {
+        try {
+            Department department = new Department();
+            department.setName(name);
+            department.setId(id);
+            departmentService.update(department);
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return "redirect:/dep";
+    }
+
+    @RequestMapping(value = "/depDelete", method = RequestMethod.GET)
+    public String deleteOne(@RequestParam(required = true) Integer id){
+        try {
+            Department department = new Department();
+            department.setId(id);
+            departmentService.delete(department);
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return "redirect:/dep";
+    }
 }
