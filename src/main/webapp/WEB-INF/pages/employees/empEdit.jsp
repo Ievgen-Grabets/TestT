@@ -5,14 +5,14 @@
     <title></title>
 </head>
 <body>
-<form:form method="post" action="/empSave">
+<form:form method="post" action="/empEditSave">
     <table>
         <tr>
             <td>FirstName:</td>
-            <td><input type="text" name="firstName"/></td>
+            <td><input type="text" name="firstName" value="${employee.firstName}"/></td>
             <td>SecondName:</td>
-            <td><input type="text" name="secondName"/></td>
-            <input type="hidden" name="depId" value="<%=request.getParameter("depId")%>">
+            <td><input type="text" name="secondName" value="${employee.secondName}"/></td>
+            <input type="hidden" name="empId" value="${employee.id}"/>
         </tr>
         <tr>
             <td colspan="2">

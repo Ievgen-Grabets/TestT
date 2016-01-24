@@ -11,7 +11,7 @@
   </tr>
   <c:forEach var="department" items="${departments}">
     <td>
-      <td>${department.name}</td>
+      <td><a href="/depEmp?depId=${department.id}">${department.name}</a></td>
         <form:form method="post" action="/depEdit">
           <td><input type="submit" value="edit"></td>
           <input type="hidden" name="depId" value="${department.id}">

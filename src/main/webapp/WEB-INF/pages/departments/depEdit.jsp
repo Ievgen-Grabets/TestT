@@ -5,14 +5,11 @@
     <title></title>
 </head>
 <body>
-<form:form method="post" action="/empSave">
+<form:form method="post" action="/depEditSave">
     <table>
         <tr>
-            <td>FirstName:</td>
-            <td><input type="text" name="firstName"/></td>
-            <td>SecondName:</td>
-            <td><input type="text" name="secondName"/></td>
-            <input type="hidden" name="depId" value="<%=request.getParameter("depId")%>">
+            <td>Name:</td>
+            <td><input type="text" name="name" value="${department.name}"/></td>
         </tr>
         <tr>
             <td colspan="2">
@@ -20,6 +17,7 @@
             </td>
         </tr>
     </table>
+    <input type="hidden" name="depId" value="${department.id}">
 </form:form>
 </body>
 </html>
