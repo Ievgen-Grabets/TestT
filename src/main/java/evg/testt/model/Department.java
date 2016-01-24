@@ -11,21 +11,11 @@ public class Department extends BaseModel{
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "department")
     private Set<Employee> employees;
 
-    @Id
-    Integer id;
 
     @Column(name = "name")
     private String name;
 
-    @Override
-    public Integer getId() {
-        return id;
-    }
 
-    @Override
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

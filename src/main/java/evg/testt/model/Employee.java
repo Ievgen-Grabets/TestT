@@ -9,8 +9,7 @@ public class Employee extends BaseModel{
     @JoinColumn(name = "department_id", nullable = false)
     private Department department;
 
-    @Id
-    private Integer id;
+
 
 
 
@@ -20,15 +19,7 @@ public class Employee extends BaseModel{
     @Column(name = "secondName")
     private String secondName;
 
-    @Override
-    public Integer getId() {
-        return id;
-    }
 
-    @Override
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getFirstName() {
         return firstName;
