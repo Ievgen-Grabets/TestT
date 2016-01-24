@@ -8,23 +8,23 @@ import java.util.Set;
 
 public class TranslatorDto {
 
-    private String languageIn;
-    private String languageOut;
+    private Language languageIn;
+    private Language languageOut;
     private String textIn;
     private String textOut;
     Set<Language> languages;
 
+    public Language getLanguageIn() { return languageIn; }
+
+    public void setLanguageIn(Language languageIn) { this.languageIn = languageIn; }
+
+    public Language getLanguageOut() { return languageOut; }
+
+    public void setLanguageOut(Language languageOut) { this.languageOut = languageOut; }
+
     public Set<Language> getLanguages() {return languages;}
 
     public void setLanguages(Set<Language> languages) {this.languages = languages;}
-
-    public String getLanguageIn() { return languageIn; }
-
-    public void setLanguageIn(String languageIn) { this.languageIn = languageIn; }
-
-    public String getLanguageOut() { return languageOut; }
-
-    public void setLanguageOut(String languageOut) { this.languageOut = languageOut; }
 
     public String getTextIn() { return textIn; }
 

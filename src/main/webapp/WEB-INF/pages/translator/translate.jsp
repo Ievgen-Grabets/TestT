@@ -13,7 +13,7 @@
         <select name="languageIn">
             <c:forEach var="language" items="${translatorDto.languages}">
                 <c:choose>
-                    <c:when test="${translatorDto.languageIn == language.languageName}">
+                    <c:when test="${translatorDto.languageIn.languageName == language.languageName}">
                         <option selected>${language.languageName}</option>
                     </c:when>
                     <c:otherwise>
@@ -27,7 +27,7 @@
         <select name="languageOut">
             <c:forEach var="language" items="${translatorDto.languages}">
                 <c:choose>
-                    <c:when test="${translatorDto.languageOut == language.languageName}">
+                    <c:when test="${translatorDto.languageOut.languageName == language.languageName}">
                         <option selected>${language.languageName}</option>
                     </c:when>
                     <c:otherwise>
