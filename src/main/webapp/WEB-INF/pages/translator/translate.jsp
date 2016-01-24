@@ -9,34 +9,22 @@
     <h5><b>We are will trnslate here !!</b></h5>
 
     <form action="/translate/doTransl" method="post">
+        <c:set var="translatorDto2" value="${translatorDto}" scope="request"/>
+
         Input Language:
-        <select name="languageIn">
-            <c:forEach var="language" items="${translatorDto.languages}">
-                <c:choose>
-                    <c:when test="${translatorDto.languageIn.languageName == language.languageName}">
-                        <option selected>${language.languageName}</option>
-                    </c:when>
-                    <c:otherwise>
-                        <option>${language.languageName}</option>
-                    </c:otherwise>
-                </c:choose>
-            </c:forEach>
-        </select><br>
+        <jsp:include page="chooseLang.jsp">
+            <jsp:param name="languageFlag" value="${translatorDto.languageIn.languageName}" />
+            <jsp:param name="selectName" value="languageIn" />
+        </jsp:include>
         <textarea rows="7" cols="70" name="textIn" autofocus maxlength="350">${translatorDto.textIn}</textarea><br><br>
+        
         Output Language:
-        <select name="languageOut">
-            <c:forEach var="language" items="${translatorDto.languages}">
-                <c:choose>
-                    <c:when test="${translatorDto.languageOut.languageName == language.languageName}">
-                        <option selected>${language.languageName}</option>
-                    </c:when>
-                    <c:otherwise>
-                        <option>${language.languageName}</option>
-                    </c:otherwise>
-                </c:choose>
-            </c:forEach>
-        </select><br>
+        <jsp:include page="chooseLang.jsp">
+            <jsp:param name="languageFlag" value="${translatorDto.languageOut.languageName}" />
+            <jsp:param name="selectName" value="languageOut" />
+        </jsp:include>
         <textarea rows="7" cols="70" name="textOut" readonly>${translatorDto.textOut}</textarea><br><br>
+
         <input type="submit" value="Translate !">
     </form>
 
