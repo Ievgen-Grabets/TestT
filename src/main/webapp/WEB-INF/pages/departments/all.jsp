@@ -10,6 +10,7 @@
   </tr>
   <c:forEach var="department" items="${departments}">
     <tr>
+      <%--<td><a href="/emp">${department.name}</a></td>--%>
       <td>${department.name}</td>
       <<td><a href="/depEdit?id=${department.id}">Edit</a> | <a href="/depDelete?id=${department.id}">Delete</a></td>
     </tr>

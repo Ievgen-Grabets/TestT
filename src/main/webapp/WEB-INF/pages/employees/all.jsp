@@ -2,16 +2,23 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html class="no-js">
 <head>
-    <title>All empl</title>
+    <title>All</title>
 </head>
 <table width="600px">
     <tr>
-        <td><b>Name</b></td>
+        <td><b>D</b></td>
+    </tr>
+    <tr>
+        <th align="left">First name</th>
+        <th align="left">Second name</th>
+
     </tr>
     <c:forEach var="employee" items="${employees}">
+
         <tr>
-            <td>${department.name}</td>                                                                 // сделана ссылкой
-            <<td><a href="/depEdit?id=${department.id}">Edit</a> | <a href="/depDelete?id=${department.id}">Delete</a></td>
+            <td>${employee.firstName} </td>
+            <td>${employee.secondName} </td>
+            <<td><a href="/empEdit?id=${employee.id}">Edit</a> | <a href="/empDelete?id=${employee.id}">Delete</a></td>
         </tr>
     </c:forEach>
     <tr>

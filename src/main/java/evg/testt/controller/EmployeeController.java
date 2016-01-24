@@ -1,10 +1,13 @@
 package evg.testt.controller;
 
+import evg.testt.model.Department;
 import evg.testt.model.Employee;
+import evg.testt.service.DepartmentService;
 import evg.testt.service.EmployeeService;
 import evg.testt.util.JspPath;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,6 +28,7 @@ public class EmployeeController {
 
     @RequestMapping(value = "/emp", method = RequestMethod.GET)
     public ModelAndView showAll(){
+
         List<Employee> employees;
         try {
             employees = employeeService.getAll();
@@ -36,23 +40,59 @@ public class EmployeeController {
         return new ModelAndView(JspPath.EMPLOYEE_ALL, "employees", employees);
     }
 
+
+
+
     @RequestMapping(value = "/empAdd", method = RequestMethod.GET)
     public ModelAndView showAdd(){
         return new ModelAndView(JspPath.EMPLOYEE_ADD);
     }
 
     @RequestMapping(value = "/empSave", method = RequestMethod.POST)
-    public String addNewOne(@RequestParam(required=true) String name, String surname){
+    public String addNewOne(@RequestParam(required=true) String firstName, String secondName){
         Employee addEmployee = new Employee();
-        addEmployee.setFirstName(name);
-        addEmployee.setSecondName(surname);
+        addEmployee.setFirstName(firstName);
+        addEmployee.setSecondName(secondName);
 
         try {
             employeeService.insert(addEmployee);
         } catch (SQLException e){
             e.printStackTrace();
         }
-        return "redirect:/dep";
+        return "redirect:/emp";
+    }
+
+    @RequestMapping(value = "/empEdit", method = RequestMethod.GET)
+    public ModelAndView showId(@RequestParam(required = true)int id){
+        Employee employee = null;
+        try {
+            employee = employeeService.getById(id);
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return new ModelAndView(JspPath.EMPLOYEE_UPDATE, "employee", employee);
+    }
+
+    @RequestMapping(value = "/empUpdate", method = RequestMethod.POST)
+    public String updateEmployee(@ModelAttribute Employee employee){
+        try {
+            employeeService.update(employee);
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return "redirect:/emp";
+    }
+
+    @RequestMapping(value ="/empDelete", method = RequestMethod.GET)
+    public String newOne(@RequestParam(required = true)int id){
+        Employee employee = new Employee();
+        employee.setId(id);
+        try {
+            employeeService.delete(employee);
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return "redirect:/emp";
     }
 
 }

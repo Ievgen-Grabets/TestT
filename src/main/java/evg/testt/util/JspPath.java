@@ -12,4 +12,6 @@ public class JspPath {
     public static final String EMPLOYEE_ALL = "employees/all";
     public static final String EMPLOYEE_ADD = "employees/edit";
     public static final String EMPLOYEE_UPDATE = "employees/update";
+    public static final String EMPLOYEE_P = "employees/p";
+
 }

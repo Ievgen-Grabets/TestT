@@ -1,4 +1,3 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -6,13 +5,13 @@
     <title></title>
 </head>
 <body>
-<form:form method="post" action="/empSave">
+<form:form method="post" action="/empInDep">
     <table>
         <tr>
             <td>First name:</td>
-            <td><input type="text" name="firstName"/></td>
+            <td><input value="${employee.firstName}" type="text" name="firstName"/></td>
             <td>Second name:</td>
-            <td><input type="text" name="secondName"/></td>
+            <td><input value="${employee.secondName}" type="text" name="secondName"/> </td>
         </tr>
         <tr>
             <td colspan="2">
@@ -20,6 +19,7 @@
             </td>
         </tr>
     </table>
+    <input type="hidden" name="id" value="${employee.id}">
 </form:form>
 </body>
 </html>
