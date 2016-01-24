@@ -3,6 +3,7 @@ package evg.testt.controller;
 import evg.testt.model.Department;
 import evg.testt.service.DepartmentService;
 import evg.testt.util.JspPath;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,8 @@ public class DepartmentController {
 
     @Autowired
     DepartmentService departmentService;
+
+    private static final Logger LOGGER = Logger.getLogger(DepartmentController.class);
 
     @RequestMapping(value = "/dep", method = RequestMethod.GET)
     public ModelAndView showAll() {
@@ -79,6 +82,7 @@ public class DepartmentController {
         }catch (SQLException e) {
             e.printStackTrace();
         }
+        LOGGER.debug("Департамент успешно удален!");
         return "redirect:/dep";
     }
 }

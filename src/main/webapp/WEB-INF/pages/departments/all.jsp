@@ -4,6 +4,21 @@
 <head>
   <title>All</title>
   <link rel="stylesheet" type="text/css" href="../../css/style.css" />
+  <style type="text/css">
+    body {
+      color:#000066
+    }
+    table {
+      border-collapse: collapse;
+      border: 2px solid black;
+    }
+
+    td {
+      padding: 5px;
+      padding-right: 30px;
+      border: 1px solid lightgray;
+    }
+  </style>
 </head>
 <body>
 <table width="600px">
