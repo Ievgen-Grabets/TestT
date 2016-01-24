@@ -12,8 +12,8 @@
   </tr>
   <c:forEach var="department" items="${departments}">
     <tr>
-      <td><a href="/emp?id=${department.id}">${department.name}</a></td>
-        <%--<td><a href="/WEB-INF/pages/employees/all.jsp">${department.name}</a></td>--%>
+      <td><a href="/emp?dep_id=${department.id}">${department.name}</a></td>
+        <%--<td><a href="de/WEB-INF/pages/employees/all.jsp">${department.name}</a></td>--%>
         <%--<td>${department.name}</td>--%>
       <td><a href="/depUpdate?id=${department.id}">Update</a>|
         <a href="/depDelete?id=${department.id}">Delete</a></td>

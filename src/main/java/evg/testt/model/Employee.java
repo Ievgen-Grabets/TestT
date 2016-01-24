@@ -4,7 +4,8 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "employees")
-public class Employee extends BaseModel{
+public class
+Employee extends BaseModel{
 
     @Column(name = "firstName")
     private String firstName;
@@ -12,8 +13,8 @@ public class Employee extends BaseModel{
     @Column(name = "secondName")
     private String secondName;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "dep_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "dep_id", nullable = false)
     private Department dep;
 
     public Department getDep() {

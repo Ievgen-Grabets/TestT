@@ -10,7 +10,7 @@ public class Department extends BaseModel{
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "dep")
+    @OneToMany(mappedBy = "dep", fetch = FetchType.EAGER)
     private List <Employee> employees;
 
     public List<Employee> getEmployees() {

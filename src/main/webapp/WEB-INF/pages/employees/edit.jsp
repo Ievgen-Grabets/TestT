@@ -24,6 +24,7 @@
         </tr>
         <tr>
             <td colspan="2">
+                <input type="text" name="dep_id" value="${department.id}">
                 <input type="submit" />
             </td>
         </tr>

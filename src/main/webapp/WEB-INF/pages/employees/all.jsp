@@ -12,17 +12,17 @@
         <td><b>firstName</b></td>
         <td><b>secondName</b></td>
     </tr>
-    <c:forEach var="employee" items="${employees}">
+    <c:forEach var="employee" items="${department.employees}">
         <tr>
             <td>${employee.firstName}</td>
             <td>${employee.secondName}</td>
-            <td><a href="/empUpdate?id=${employee.id}">Update</a></td>>
+            <td><a href="/empUpdate?id=${employee.id}">Update</a></td>
             <td><a href="/empDelete?id=${employee.id}">Delete</a></td>
         </tr>
     </c:forEach>
     <tr>
         <td colspan="5">
-            <a href="/empAdd">Add new one Employee</a>
+            <a href="/empAdd?dep_id=${department.id}">Add new one Employee</a>
         </td>
     </tr>
     <a href="/dep">All departments</a>

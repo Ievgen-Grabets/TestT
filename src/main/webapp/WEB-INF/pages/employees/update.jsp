@@ -24,11 +24,13 @@
         </tr>
         <tr>
             <td colspan="2">
+                <input type="hidden" name="id" value="${employee.id}">
+                <input type="hidden" name="dep_id" value="${employee.dep.id}">
                 <input type="submit" />
             </td>
         </tr>
     </table>
-    <input type="hidden" name="id" value="${employee.id}">
+    <input type="hidden" name="id" value="${employee.dep.id}">
 </form:form>
 </body>
 </html>
