@@ -11,10 +11,10 @@
     <c:forEach var="language" items="${translatorDto2.languages}">
         <c:choose>
             <c:when test="${param.languageFlag == language.fullName}">
-                <option selected id="${language.shortName}">${language.fullName}</option>
+                <option selected value="${language.shortName}">${language.fullName}</option>
             </c:when>
             <c:otherwise>
-                <option id="${language.shortName}">${language.fullName}</option>
+                <option value="${language.shortName}">${language.fullName}</option>
             </c:otherwise>
         </c:choose>
     </c:forEach>

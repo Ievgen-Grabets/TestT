@@ -9,6 +9,7 @@ import org.apache.http.client.cache.HttpCacheContext;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.cache.CacheConfig;
 import org.apache.http.impl.client.cache.CachingHttpClients;
@@ -18,6 +19,9 @@ import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.nio.charset.Charset;
 import java.util.*;
 
 
@@ -86,7 +90,8 @@ public class TranslateServiceImpl implements TranslateService {
         return Collections.unmodifiableSet(availableLanguages);
     }
 
-    private String executeRequest(String url) throws IOException {
+    private String executeRequest(URI url) throws IOException {
+
         HttpGet httpget = new HttpGet(url);
 
         try (CloseableHttpResponse response = cachingClient.execute(httpget, context)) {
@@ -94,22 +99,39 @@ public class TranslateServiceImpl implements TranslateService {
             if (response.getStatusLine().getStatusCode() == 200) {
                 entity = response.getEntity();
                 if (entity != null && entity.getContentLength() != -1) {
-                    return EntityUtils.toString(entity);
+                    return encodingStringToUTF8(entity);
                 }
             }
         }
         return "";
     }
 
+    private URI buildTranslateServiceMainUri(TranslateParams translateParams) throws URISyntaxException {
+        return new URIBuilder()
+                .setScheme("http")
+                .setHost("api.lingualeo.com")
+                .setPath("/translate.php")
+                .setParameter("q", translateParams.getTextToTranslate())
+                .setParameter("source", translateParams.getSourceLang())
+                .setParameter("target", translateParams.getTargetLang())
+                .setParameter("port", "1001")
+                .build();
+    }
+
+    private URI buildTranslateServiceAdditionUri(TranslateParams translateParams) throws URISyntaxException {
+        return new URIBuilder()
+                .setScheme("http")
+                .setHost("api.lingualeo.com")
+                .setPath("/gettranslates")
+                .setParameter("word", translateParams.getTextToTranslate())
+                .build();
+    }
+
     private TranslateResultImpl executeAndProcessResponseForMainURL(TranslateParams translateParams)
             throws TranslateServiceException {
-        String url = String.format(FMT_PREPARED_TRANSLATE_SERVICE_URL_MAIN,
-                translateParams.getTextToTranslate(),
-                translateParams.getSourceLang(),
-                translateParams.getTargetLang());
         try {
-            return parseMainTranslateResultFromJson(executeRequest(url));
-        } catch (IOException e) {
+            return parseMainTranslateResultFromJson(executeRequest(buildTranslateServiceMainUri(translateParams)));
+        } catch (IOException | URISyntaxException e) {
             e.printStackTrace();
             throw new TranslateServiceException(e);
         }
@@ -121,7 +143,7 @@ public class TranslateServiceImpl implements TranslateService {
         TranslateResultImpl translateResult = executeAndProcessResponseForMainURL(translateParams);
 
         if(sourceLang.equals(LANG_ENGLISH_EN.getShortName()) && targetLang.equals(LANG_RUSSIAN_RU.getShortName())) {
-            TranslateResultImpl additionTranslateResult = executeAndProceseResponseForAddURL(translateParams);
+            TranslateResultImpl additionTranslateResult = executeAndProcessResponseForAddURL(translateParams);
             updateTranslateResult(translateResult,additionTranslateResult);
         }
 
@@ -140,16 +162,19 @@ public class TranslateServiceImpl implements TranslateService {
         return translate(textToTranslate, sourceLang.getShortName(), targetLang.getShortName());
     }
 
-    private TranslateResultImpl executeAndProceseResponseForAddURL(TranslateParams translateParams) {
-        String url = String.format(FMT_PREPARED_TRANSLATE_SERVICE_URL_ADDITION,
-                translateParams.getTextToTranslate());
+    private TranslateResultImpl executeAndProcessResponseForAddURL(TranslateParams translateParams) {
         try {
-            return parseAdditionTranslateResultFromJson(executeRequest(url));
-        } catch (IOException e) {
+            return parseAdditionTranslateResultFromJson(executeRequest(buildTranslateServiceAdditionUri(translateParams)));
+        } catch (IOException | URISyntaxException e) {
             e.printStackTrace();
             throw new TranslateServiceException(e);
         }
     }
+
+    private String encodingStringToUTF8(HttpEntity entity) throws IOException {
+        return new String(EntityUtils.toByteArray(entity), Charset.forName("UTF-8"));
+    }
+
 
     @SuppressWarnings("unchecked")
     private TranslateResultImpl parseAdditionTranslateResultFromJson(String json) {
