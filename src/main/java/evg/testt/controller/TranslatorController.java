@@ -1,7 +1,6 @@
 package evg.testt.controller;
 
 import evg.testt.dto.TranslatorDto;
-import evg.testt.service.TranslatorService;
 import evg.testt.service.translateservice.TranslateService;
 import evg.testt.util.JspPath;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,14 +15,9 @@ import java.sql.SQLException;
 @RequestMapping(value = "translate")
 public class TranslatorController {
 
-    //@Autowired
-    //Language languageService;
-
     @Autowired
     TranslateService translateService;
 
-    @Autowired
-    TranslatorService translatorService;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public ModelAndView mainView() throws SQLException {
@@ -57,6 +51,4 @@ public class TranslatorController {
         }
         return new ModelAndView(JspPath.TRANSLATOR_HOME, "translatorDto", translatorDto);
     }
-
-
 }
