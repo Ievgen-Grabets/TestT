@@ -67,11 +67,11 @@ public class DepartmentController {
     }
 
     @RequestMapping(value = "/depEdit", method = RequestMethod.GET)
-    public ModelAndView showAdd1(Integer id) throws SQLException {
+    public ModelAndView showRename(Integer id) throws SQLException {
         return new ModelAndView(JspPath.DEPARTMENT_RENAME, "departments", departmentService.getById(id));
     }
     @RequestMapping(value = "/depSave1", method = RequestMethod.POST)
-    public String addNewOne1(@RequestParam(required = true) Integer id, String name) {
+    public String Rename(@RequestParam(required = true) Integer id, String name) {
 
         try {
             Department dep = departmentService.getById(id);

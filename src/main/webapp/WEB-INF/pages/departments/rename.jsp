@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title></title>
+    <title>Rename</title>
 </head>
 <body>
 <form:form method="post" action="/depSave1">
@@ -15,7 +15,7 @@
         </tr>
         <tr>
             <td colspan="2">
-                <input type="submit"/>
+                <input type="submit" value="Rename"/>
             </td>
         </tr>
     </table>

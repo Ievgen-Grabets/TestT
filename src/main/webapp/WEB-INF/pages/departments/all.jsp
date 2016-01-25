@@ -2,22 +2,29 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html class="no-js">
 <head>
-  <title>All</title>
+  <title>All Departmets</title>
 </head>
-<table width="600px">
+<table width="200px">
   <tr>
-    <td><b>Name</b></td>
+    <td width="200"><b>Departments:</b></td>
   </tr>
+</table>
+<table width="400px" border="1">
+  <td width="50" align="center"><b>ID</b></td>
+  <td width="100" align="center"><b>Name</b></td>
+  <td width="100" align="center"><b>Actions</b></td>
   <c:forEach var="department" items="${departments}">
     <tr>
-      <td>${department.name}</td>
-      <td>${department.id}</td>
-      <td><a href="/depEdit?id=${department.id}">Edit</a> | <a href="/depDelete?id=${department.id}">Delete</a> </td>
+      <td width="50" align="center">${department.id}</td>
+      <td width="100"><a href="/empDep?depId=${department.id}">${department.name}</a></td>
+      <td width="100" align="center"><a href="/depEdit?id=${department.id}">Edit</a> | <a href="/depDelete?id=${department.id}">Delete</a> </td>
     </tr>
   </c:forEach>
+</table>
+<table width="200">
   <tr>
-    <td colspan="5">
-      <a href="/depAdd">Add new one</a>
+    <td width="300" align="center">
+      <a href="/depAdd">Add new Department</a>
     </td>
   </tr>
 </table>

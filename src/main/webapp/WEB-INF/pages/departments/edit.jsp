@@ -2,18 +2,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title></title>
+    <title>Add</title>
 </head>
 <body>
 <form:form method="post" action="/depSave">
     <table>
         <tr>
-            <td>Name:</td>
+            <td>Name Department:</td>
             <td><input type="text" name="name"/></td>
         </tr>
         <tr>
-            <td colspan="2">
-                <input type="submit" />
+            <td>
+                <input type="submit" value="Add Department"/>
             </td>
         </tr>
     </table>
