@@ -10,14 +10,32 @@
   </tr>
   <c:forEach var="department" items="${departments}">
     <tr>
-      <%--<td><a href="/emp">${department.name}</a></td>--%>
       <td>${department.name}</td>
-      <<td><a href="/depEdit?id=${department.id}">Edit</a> | <a href="/depDelete?id=${department.id}">Delete</a></td>
+      <td>
+        <form method="post" action="/depDelete">
+          <input type="hidden" name="id" value="${department.id}">
+          <input type="submit" value="Delete">
+        </form>
+      </td>
+      <td>
+        <form method="post" action="/depEdit">
+          <input type="hidden" name="id" value="${department.id}">
+          <input type="submit" value="Update">
+        </form>
+      </td>
+      <td>
+        <form method="get" action="/emp">
+          <input type="hidden" name="id" value="${department.id}">
+          <input type="submit" value="Employees">
+        </form>
+      </td>
     </tr>
   </c:forEach>
   <tr>
     <td colspan="5">
-      <a href="/depAdd">Add new one</a>
+<form method="post" action="/depEdit">
+  <input type="submit" value="Add new one">
+</form>
     </td>
   </tr>
 

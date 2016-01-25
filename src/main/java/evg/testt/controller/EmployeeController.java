@@ -26,72 +26,51 @@ public class EmployeeController {
         @Autowired
         EmployeeService employeeService;
 
+        @Autowired
+        DepartmentService departmentService;
+
     @RequestMapping(value = "/emp", method = RequestMethod.GET)
-    public ModelAndView showAll(){
+    public ModelAndView showAll(@RequestParam(required = false) Integer id) throws SQLException{
 
-        List<Employee> employees;
-        try {
-            employees = employeeService.getAll();
-        }
-        catch (SQLException e){
-            employees = Collections.emptyList();
-            e.printStackTrace();
-        }
-        return new ModelAndView(JspPath.EMPLOYEE_ALL, "employees", employees);
+        ModelAndView modelAndView = new ModelAndView(JspPath.EMPLOYEE_ALL);
+        Department department = departmentService.getById(id);
+            modelAndView.addObject("department", department);
+            modelAndView.addObject("employees", employeeService.getByDepartment(department));
+
+        return modelAndView;
     }
 
-
-
-
-    @RequestMapping(value = "/empAdd", method = RequestMethod.GET)
-    public ModelAndView showAdd(){
-        return new ModelAndView(JspPath.EMPLOYEE_ADD);
-    }
-
-    @RequestMapping(value = "/empSave", method = RequestMethod.POST)
-    public String addNewOne(@RequestParam(required=true) String firstName, String secondName){
-        Employee addEmployee = new Employee();
-        addEmployee.setFirstName(firstName);
-        addEmployee.setSecondName(secondName);
-
-        try {
-            employeeService.insert(addEmployee);
-        } catch (SQLException e){
-            e.printStackTrace();
-        }
-        return "redirect:/emp";
-    }
-
-    @RequestMapping(value = "/empEdit", method = RequestMethod.GET)
-    public ModelAndView showId(@RequestParam(required = true)int id){
-        Employee employee = null;
-        try {
-            employee = employeeService.getById(id);
-        } catch (SQLException e){
-            e.printStackTrace();
-        }
-        return new ModelAndView(JspPath.EMPLOYEE_UPDATE, "employee", employee);
-    }
-
-    @RequestMapping(value = "/empUpdate", method = RequestMethod.POST)
-    public String updateEmployee(@ModelAttribute Employee employee){
-        try {
+    @RequestMapping(value = "/empSaveOrUpdate", method = RequestMethod.POST)
+    public String addNewOne(@ModelAttribute Employee employee, @RequestParam(required = true) Integer departmentId) throws SQLException{
+        Department department = departmentService.getById(departmentId);
+        employee.setDepartment(department);
+        if (employee.getId() == null){
+            employeeService.insert(employee);
+        } else {
             employeeService.update(employee);
-        } catch (SQLException e){
-            e.printStackTrace();
         }
+
         return "redirect:/emp";
     }
 
-    @RequestMapping(value ="/empDelete", method = RequestMethod.GET)
-    public String newOne(@RequestParam(required = true)int id){
-        Employee employee = new Employee();
-        employee.setId(id);
-        try {
-            employeeService.delete(employee);
-        } catch (SQLException e){
-            e.printStackTrace();
+    @RequestMapping(value = "/empEdit", method = RequestMethod.POST)
+    public ModelAndView updateOne(@RequestParam(required = true) Integer department_id, @RequestParam(required = false) Integer id) throws SQLException{
+        ModelAndView modelAndView = new ModelAndView(JspPath.EMPLOYEE_EDIT);
+        Employee employee;
+        if(id !=null){
+            employee = employeeService.getById(id);
+        } else {
+            Department department = departmentService.getById(department_id);
+            employee = Employee.newBuilder().setDepartment(department).build();
         }
+        modelAndView.addObject("employee", employee);
+        return modelAndView;
+    }
+
+    @RequestMapping(value ="/empDelete", method = RequestMethod.POST)
+    public String newOne(@RequestParam(required = true)int id) throws SQLException{
+        Employee employee = Employee.newBuilder().setId(id).build();
+        employeeService.delete(employee);
         return "redirect:/emp";
     }
 

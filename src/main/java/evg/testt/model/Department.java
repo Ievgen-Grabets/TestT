@@ -8,14 +8,10 @@ import java.util.Set;
 @Entity(name = "departments")
 public class Department extends BaseModel{
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "department")
+    @OneToMany(cascade = CascadeType.MERGE, mappedBy = "department")
     private Set<Employee> employees;
 
-
-    @Column(name = "name")
     private String name;
-
-
 
     public String getName() {
         return name;
@@ -31,5 +27,30 @@ public class Department extends BaseModel{
 
     public void setEmployees(Set<Employee> employees) {
         this.employees = employees;
+    }
+
+    public static Builder newBuilder() {
+        return new Department().new Builder();
+    }
+
+    public class Builder {
+
+        private Builder() {
+        }
+
+        public Builder setId(Integer id) {
+            Department.this.setId(id);
+            return this;
+        }
+
+        public Builder setName(String name) {
+            Department.this.name = name;
+
+            return this;
+        }
+
+        public Department build() {
+            return Department.this;
+        }
     }
 }

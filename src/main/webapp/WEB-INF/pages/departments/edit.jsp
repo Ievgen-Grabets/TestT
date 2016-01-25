@@ -5,15 +5,16 @@
     <title></title>
 </head>
 <body>
-<form:form method="post" action="/depSave">
+<form:form method="post" action="/depSaveOrUpdate">
     <table>
         <tr>
             <td>Name:</td>
-            <td><input type="text" name="name"/></td>
+            <td><input type="text" name="name" value="${department.name}"/></td>
         </tr>
         <tr>
             <td colspan="2">
-                <input type="submit" />
+                <input type="hidden" name="id" value="${department.id}" >
+                <input type="submit" value="Save" >
             </td>
         </tr>
     </table>

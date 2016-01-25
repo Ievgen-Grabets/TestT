@@ -11,7 +11,12 @@
   <title>Hello world</title>
 </head>
 <body>
-
-  Home World !
-
+  <tr>
+    <th>
+    <form method="get" action="/dep">
+      <input type="submit" value="Departments">
+    </form>
+    </th>
+  </tr>
+  </body>
 </html>

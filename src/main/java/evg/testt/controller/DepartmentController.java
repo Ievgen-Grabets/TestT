@@ -19,79 +19,41 @@ import java.sql.SQLException;
 @Controller
 public class DepartmentController {
 
-
-
     @Autowired
     DepartmentService departmentService;
 
     @RequestMapping(value = "/dep", method = RequestMethod.GET)
-    public ModelAndView showAll() {
-        List<Department> departments;
-        try {
-            departments = departmentService.getAll();
-        } catch (SQLException e) {
-            departments = Collections.emptyList();
-            e.printStackTrace();
-        }
-        return new ModelAndView(JspPath.DEPARTMENT_ALL, "departments", departments);
+    public ModelAndView showAll() throws SQLException{
+
+        return new ModelAndView(JspPath.DEPARTMENT_ALL, "departments", departmentService.getAll());
     }
 
-    @RequestMapping(value = "/depAdd", method = RequestMethod.GET)
-    public ModelAndView showAdd() {
-        return new ModelAndView(JspPath.DEPARTMENT_ADD);
-    }
-
-    @RequestMapping(value = "/depSave", method = RequestMethod.POST)
-    public String addNewOne(@RequestParam(required = true) String name) {
-        Department addedDepartment = new Department();
-        addedDepartment.setName(name);
-        try {
-            departmentService.insert(addedDepartment);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+   @RequestMapping(value = "/depSaveOrUpdate", method = RequestMethod.POST)
+    public String addNewOne(@RequestParam(required = false) Integer id, @RequestParam(required = true) String name) throws SQLException{
+        Department department = Department.newBuilder().setId(id).setName(name).build();
+       if(id == null){
+           departmentService.insert(department);
+       } else {
+           departmentService.update(department);
+       }
         return "redirect:/dep";
     }
 
-    @RequestMapping(value = "/depEdit", method = RequestMethod.GET)
-    public ModelAndView showd(@RequestParam(required = true) int id) {
-        Department department = null;
-        try {
-             department = departmentService.getById(id);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return new ModelAndView(JspPath.DEPARTMENT_UPDATE, "sas", department);
-    }
-
-    @RequestMapping(value = "/depUpdate", method = RequestMethod.POST)
-    public String updateName (@ModelAttribute Department department) {
-        try {
-            departmentService.update(department);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-
-
+    @RequestMapping(value = "/depDelete", method = RequestMethod.POST)
+    public String deleteOne(@RequestParam(required = true) Integer id) throws SQLException {
+        Department department = Department.newBuilder().setId(id).build();
+        departmentService.delete(department);
         return "redirect:/dep";
     }
 
-
-    @RequestMapping(value = "/depDelete", method = RequestMethod.GET)
-    public String NewOne(@RequestParam(required = true) int id) {
-        Department addedDepartment = new Department();
-        addedDepartment.setId(id);
-        try {
-            departmentService.delete(addedDepartment);
-        } catch (SQLException e) {
-            e.printStackTrace();
+    @RequestMapping(value = "/depEdit", method = RequestMethod.POST)
+    public ModelAndView updateOne(@RequestParam(required = false) Integer id) throws SQLException{
+        ModelAndView modelAndView = new ModelAndView(JspPath.DEPARTMENT_EDIT);
+        if (id != null){
+            Department department = departmentService.getById(id);
+            modelAndView.addObject("department", department);
         }
-        return "redirect:/dep";
+        return modelAndView;
     }
-
-
-
 
 }
