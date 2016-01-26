@@ -28,6 +28,7 @@ public class DepartmentController {
             departments = departmentService.getAll();
         } catch (SQLException e) {
             departments = Collections.emptyList();
+
             e.printStackTrace();
         }
         return new ModelAndView(JspPath.DEPARTMENT_ALL, "departments", departments);
@@ -50,5 +51,34 @@ public class DepartmentController {
         return "redirect:/dep";
     }
 
+    @RequestMapping(value = "/depDelete", method = RequestMethod.GET)
+    public String Delete(@RequestParam(required = true) Integer id) {
+        try {
+            Department addedDepartment = departmentService.getById(id);
+            departmentService.delete(addedDepartment);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return "redirect:/dep";
+    }
 
+    @RequestMapping(value = "/depUpdate", method = RequestMethod.GET)
+    public ModelAndView showUpdate(@RequestParam(required = false) Integer id) throws SQLException {
+
+        return new ModelAndView(JspPath.DEPARTMENT_EDIT, "department", departmentService.getById(id));
+
+    }
+
+    @RequestMapping(value = "/depSave1", method = RequestMethod.POST)
+    public String depEdit(@RequestParam(required = true) Integer id, String name) throws SQLException {
+        Department department = departmentService.getById(id);
+        department.setName(name);
+        try {
+            departmentService.update(department);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return "redirect:/dep";
+
+    }
 }
