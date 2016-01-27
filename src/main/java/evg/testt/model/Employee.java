@@ -5,7 +5,7 @@ import javax.persistence.*;
 @Entity(name = "employees")
 public class Employee extends BaseModel{
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "department_id")
     private Department department;
 

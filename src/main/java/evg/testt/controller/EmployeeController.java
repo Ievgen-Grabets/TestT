@@ -30,7 +30,7 @@ public class EmployeeController {
         DepartmentService departmentService;
 
     @RequestMapping(value = "/emp", method = RequestMethod.GET)
-    public ModelAndView showAll(@RequestParam(required = false) Integer id) throws SQLException{
+    public ModelAndView showAll(@RequestParam(required = true) Integer id) throws SQLException{
 
         ModelAndView modelAndView = new ModelAndView(JspPath.EMPLOYEE_ALL);
         Department department = departmentService.getById(id);
@@ -50,7 +50,7 @@ public class EmployeeController {
             employeeService.update(employee);
         }
 
-        return "redirect:/emp";
+        return "redirect:/emp?id="+departmentId;
     }
 
     @RequestMapping(value = "/empEdit", method = RequestMethod.POST)
@@ -68,7 +68,7 @@ public class EmployeeController {
     }
 
     @RequestMapping(value ="/empDelete", method = RequestMethod.POST)
-    public String newOne(@RequestParam(required = true)int id) throws SQLException{
+    public String newOne(@RequestParam(required = true)Integer id) throws SQLException{
         Employee employee = Employee.newBuilder().setId(id).build();
         employeeService.delete(employee);
         return "redirect:/emp";
