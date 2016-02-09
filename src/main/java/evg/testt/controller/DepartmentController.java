@@ -18,6 +18,9 @@ import java.sql.SQLException;
 @Controller
 public class DepartmentController {
 
+    /**
+     * first init commit
+     */
     @Autowired
     DepartmentService departmentService;
 
