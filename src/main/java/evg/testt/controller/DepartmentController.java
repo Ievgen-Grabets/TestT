@@ -20,6 +20,7 @@ public class DepartmentController {
 
     /**
      * first init commit
+     * second commit
      */
     @Autowired
     DepartmentService departmentService;
