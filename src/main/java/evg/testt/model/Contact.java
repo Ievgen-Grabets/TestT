@@ -4,6 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
+import java.net.URL;
 
 /**
  * Created on 9/10/15.
@@ -19,7 +20,11 @@ public class Contact implements Serializable {
     private String number;
     private String email;
 
+
+
     public Contact(){
+
+
     }
 
     public Contact(String name, String number, String email) {
