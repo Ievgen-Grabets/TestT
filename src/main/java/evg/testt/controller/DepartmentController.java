@@ -49,6 +49,33 @@ public class DepartmentController {
         }
         return "redirect:/dep";
     }
+        @RequestMapping(value = "/depEditSave", method = RequestMethod.POST)
+        public String edit(@RequestParam(required = true) String name,@RequestParam(required = true) int id) {
+             try {
+                Department department = new Department();
+                department.setName(name);
+                department.setId(id);
+                departmentService.update(department);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return "redirect:/dep";
+    }
 
-
+    @RequestMapping(value = "/depDelete", method = RequestMethod.GET)
+    public String delete(@RequestParam(required = true) int id) {
+        Department addedDepartment = new Department();
+        addedDepartment.setId(id);
+        try {
+            departmentService.delete(addedDepartment);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return "redirect:/dep";
+    }
+    @RequestMapping(value = "/depEdit", method = RequestMethod.GET)
+    public ModelAndView showEdit(@RequestParam(required = true) int id) throws SQLException {
+        Department department = departmentService.getById(id);
+        return new ModelAndView(JspPath.DEPARTMENT_EDIT, "department", department);
+    }
 }
