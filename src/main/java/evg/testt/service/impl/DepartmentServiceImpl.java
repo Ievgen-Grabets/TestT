@@ -19,7 +19,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 @Service
-@Transactional
+@Transactional(readOnly = true)
 public class DepartmentServiceImpl extends BaseService<Department, DepartmentDao> implements DepartmentService{
 
     @PersistenceContext(type= PersistenceContextType.EXTENDED)
@@ -32,8 +32,6 @@ public class DepartmentServiceImpl extends BaseService<Department, DepartmentDao
     @Transactional(readOnly = true, propagation = Propagation.REQUIRES_NEW)
     public List<Department> getAll() throws SQLException {
         List<Department> departments = dao.findAll();
-        TransactionSynchronizationManager.isActualTransactionActive();
-        TransactionSynchronizationManager.setActualTransactionActive(true);
         TransactionSynchronizationManager.isActualTransactionActive();
         for(Department department: departments){
             employeeService.getByDepartment(department);
