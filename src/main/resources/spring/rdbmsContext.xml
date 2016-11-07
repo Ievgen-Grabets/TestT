@@ -40,11 +40,8 @@
         </property>
     </bean>
 
-    <tx:annotation-driven/>
+    <tx:annotation-driven transaction-manager="transactionManager"/>
 
-    <aop:config proxy-target-class="true">
-        <!-- other beans defined here... -->
-    </aop:config>
 
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="dataSource" ref="dataSource"/>
