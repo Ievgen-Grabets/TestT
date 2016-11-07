@@ -3,13 +3,15 @@ package evg.testt.service.impl;
 import evg.testt.service.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLException;
 import java.util.List;
 
+@Transactional
 public abstract class BaseService <T , P extends JpaRepository<T,Integer>> implements Service<T> {
 
-    protected  P dao;
+    public   P dao;
 
     @Autowired
     public void setPersistence(P dao){
